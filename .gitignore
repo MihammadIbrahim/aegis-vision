@@ -1,3 +1,44 @@
+# AegisVision — repository-wide safety net. Each project folder has its own stack-specific .gitignore too.
+
+# --- OS & editor junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
+*.tmp
+*.bak
+
+# --- Scratch databases, dumps, local clusters ---
+*.sql
+# The PostgreSQL container's init scripts are source, not dumps.
+!backend/docker/postgres/init/*.sql
+*.dump
+pgdata*/
+pgdata*
+tmp_*
+
+# --- Environment & secrets (only .env.example files are committed) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.p8
+*.jks
+*service-account*.json
+*firebase*adminsdk*.json
+kaggle.json
+google-services.json
+GoogleService-Info.plist
+.dev_outbox/
+
+# --- Rules from the original remote .gitignore (commit fc1f898), kept verbatim ---
+# Python envs and caches, archives, model weights, data folders, local env file.
 venv/
 .venv/
 __pycache__/
@@ -12,3 +53,5 @@ __pycache__/
 datasets/
 data/
 .env
+# Re-allow the tiny generated test graphs and the dataset placeholder docs (already tracked; not models or data).
+!backend/services/cv_inference/tests/fixtures/*.onnx

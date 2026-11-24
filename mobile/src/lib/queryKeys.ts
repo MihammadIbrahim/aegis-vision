@@ -1,0 +1,20 @@
+/** TanStack Query keys (one place, so real-time events invalidate exactly what they affect). */
+export const qk = {
+  dashboard: ["guard", "dashboard"] as const,
+  location: ["guard", "location"] as const,
+  profile: ["guard", "profile"] as const,
+  realtimeStatus: ["realtime", "status"] as const,
+  alerts: ["alerts"] as const,
+  alert: (id: string) => ["alerts", id] as const,
+  alertHistory: (id: string) => ["alerts", id, "history"] as const,
+  responders: (id: string) => ["alerts", id, "responders"] as const,
+  alertMessages: (id: string) => ["chat", "alert", id] as const,
+  incidents: ["incidents"] as const,
+  incidentMessages: (id: string) => ["chat", "incident", id] as const,
+  reports: ["reports"] as const,
+  reportLocations: ["reports", "locations"] as const,
+  myCalls: ["calls", "mine"] as const,
+  call: (id: string) => ["calls", id] as const,
+  activeCall: (scope: "ALERT" | "INCIDENT", id: string) => ["calls", "active", scope, id] as const,
+  notifications: ["notifications"] as const,
+};

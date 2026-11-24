@@ -1,0 +1,35 @@
+# Install torch and torchvision first, with the index for your hardware:
+#   CPU (local tests):   pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cpu
+#   GPU (RTX 40-series): pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu124
+torch==2.14.1
+torchvision==0.29.1
+
+# Detection (YOLO11 / RT-DETR training and export). AGPL-3.0: see README "Licences".
+ultralytics==8.4.189
+albumentations==2.0.8          # CCTV augmentations; also picked up automatically by ultralytics
+
+# Video clips (fight / violence)
+decord==0.6.0                  # fast random-access decoding; OpenCV is the fallback reader
+opencv-python-headless==5.0.0.93
+
+# Re-ID
+timm==1.0.31                   # backbone utilities (OSNet is implemented in models/reid_models.py)
+faiss-cpu==1.16.0              # cosine-similarity index used by the runtime gallery; faiss-gpu-cu12 on the server if preferred
+
+# Export and parity checks
+onnx==1.23.2
+onnxsim==0.8.1
+onnxruntime==1.31.0            # replace with onnxruntime-gpu==1.31.0 on the GPU server
+onnxscript==0.7.2
+
+# Data, metrics, tooling
+numpy==2.4.6
+scipy==1.17.1
+pandas==3.1.0
+scikit-learn==1.9.1
+pyyaml==6.0.3
+pydantic==2.14.1
+matplotlib==3.11.2
+tqdm==4.70.1
+pytest==9.2.0
+jupyter==1.1.1

@@ -1,0 +1,82 @@
+{
+  "expo": {
+    "name": "AI-CCTV Guard",
+    "slug": "ai-cctv-guard",
+    "scheme": "cctvguard",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#F3F5F9",
+    "primaryColor": "#2855E8",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "pk.edu.fyp.cctvguard",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "The Guard app uses the microphone for in-app voice calls about alerts and cases.",
+        "NSCameraUsageDescription": "The Guard app uses the camera to attach a photo to a manual security report.",
+        "NSPhotoLibraryUsageDescription": "The Guard app lets you attach a photo from your gallery to a manual security report.",
+        "UIBackgroundModes": [
+          "audio",
+          "remote-notification"
+        ]
+      }
+    },
+    "android": {
+      "package": "pk.edu.fyp.cctvguard",
+      "adaptiveIcon": {
+        "backgroundColor": "#101D35",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.VIBRATE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.CAMERA",
+        "android.permission.WAKE_LOCK",
+        "android.permission.USE_FULL_SCREEN_INTENT",
+        "android.permission.ACCESS_NOTIFICATION_POLICY"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-audio",
+        {
+          "enableBackgroundPlayback": true,
+          "microphonePermission": "The Guard app uses the microphone for in-app voice calls."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "sounds": [
+            "./assets/sounds/alarm.wav"
+          ],
+          "color": "#C33643"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Attach a photo from your gallery to a manual security report.",
+          "cameraPermission": "Take a photo for a manual security report."
+        }
+      ],
+      "@livekit/react-native-expo-plugin",
+      "@config-plugins/react-native-webrtc",
+      "expo-dev-client",
+      "expo-font",
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}

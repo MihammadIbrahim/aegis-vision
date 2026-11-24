@@ -1,0 +1,72 @@
+{
+  "manifest_version": 1,
+  "version": "test",
+  "framework": "onnx test graph",
+  "file": "fight_dummy.onnx",
+  "sha256": "a1bdb8fa1fc6c7f8ac918d36d85199d44e9f6332478ed25db636ca25de58f227",
+  "size_bytes": 316,
+  "dataset": {
+    "note": "none: synthetic test graph"
+  },
+  "training": {
+    "commit": null,
+    "finished_at": null
+  },
+  "metrics": {},
+  "export": {
+    "opset": 17,
+    "dynamic_batch": true,
+    "simplified": false,
+    "parity_max_abs_diff": 0.0,
+    "parity_tolerance": 0.0001,
+    "parity_passed": true,
+    "exported_at": "2026-11-14T00:00:00+00:00",
+    "exporter": "tests/fixtures/make_dummy_models.py"
+  },
+  "license": "test fixture, not a model",
+  "name": "fight-dummy",
+  "task": "violence_classification",
+  "architecture": "test graph",
+  "input": {
+    "name": "clips",
+    "shape": [
+      "batch",
+      3,
+      8,
+      32,
+      32
+    ],
+    "layout": "NCTHW",
+    "color_order": "RGB",
+    "scale": 0.00392156862745098,
+    "mean": [
+      0,
+      0,
+      0
+    ],
+    "std": [
+      1,
+      1,
+      1
+    ],
+    "clip_len": 8,
+    "target_fps": 5.0,
+    "resize_short": 36,
+    "crop": 32
+  },
+  "output": {
+    "name": "probabilities",
+    "shape": [
+      "batch",
+      2
+    ],
+    "format": "softmax-probabilities"
+  },
+  "class_labels": [
+    "normal",
+    "violence"
+  ],
+  "thresholds": {
+    "violence_probability": 0.5
+  }
+}

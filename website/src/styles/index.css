@@ -1,0 +1,85 @@
+/* Style entry point. Tailwind CSS v4 without its preflight reset (the existing element defaults in
+ * base.css stay in charge), in explicit cascade layers so utilities always win over component classes:
+ *   theme → base (element defaults) → components (shared classes, built with @apply) → utilities.
+ * Colours come only from tokens.css: the @theme block below registers each token as a Tailwind colour,
+ * so `bg-surface`, `text-fg-muted`, `border-border`, `ring-focus` … follow the light and dark themes. */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "./tokens.css";
+@import "./base.css" layer(base);
+@import "./components.css" layer(components);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@source "../";
+
+/* `dark:` follows the app's own switch (html[data-theme="dark"]), not the system setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Token aliases. `inline` makes utilities read the token directly, so they change with the theme. */
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-on-primary: var(--color-on-primary);
+  --color-accent: var(--color-accent);
+  --color-on-accent: var(--color-on-accent);
+  --color-link: var(--color-link);
+  --color-danger-solid: var(--color-danger-solid);
+  --color-on-danger: var(--color-on-danger);
+  --color-disabled-bg: var(--color-disabled-bg);
+  --color-disabled-text: var(--color-disabled-text);
+
+  --color-bg: var(--color-bg);
+  --color-canvas: var(--color-canvas);
+  --color-surface: var(--color-surface);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-surface-hover: var(--color-surface-hover);
+  --color-surface-header: var(--color-surface-header);
+
+  --color-fg: var(--color-text);
+  --color-fg-secondary: var(--color-text-secondary);
+  --color-fg-muted: var(--color-text-muted);
+
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-input-bg: var(--color-input-bg);
+  --color-focus: var(--color-focus);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
+  --color-success-bg: var(--color-success-bg);
+  --color-success-text: var(--color-success-text);
+  --color-warning-bg: var(--color-warning-bg);
+  --color-warning-text: var(--color-warning-text);
+  --color-danger-bg: var(--color-danger-bg);
+  --color-danger-text: var(--color-danger-text);
+  --color-info-bg: var(--color-info-bg);
+  --color-info-text: var(--color-info-text);
+
+  --color-sidebar-bg: var(--color-sidebar-bg);
+  --color-sidebar-brand: var(--color-sidebar-brand);
+  --color-sidebar-text: var(--color-sidebar-text);
+  --color-sidebar-active-bg: var(--color-sidebar-active-bg);
+  --color-sidebar-active-text: var(--color-sidebar-active-text);
+  --color-sidebar-focus: var(--color-sidebar-focus);
+  --color-topbar-bg: var(--color-topbar-bg);
+  --color-topbar-end: var(--color-topbar-end);
+  --color-topbar-text: var(--color-topbar-text);
+  --color-topbar-link: var(--color-topbar-link);
+  --color-topbar-control-bg: var(--color-topbar-control-bg);
+  --color-topbar-control-text: var(--color-topbar-control-text);
+  --color-topbar-control-border: var(--color-topbar-control-border);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* Sizes the app's tokens use that Tailwind does not have. */
+@theme {
+  --text-md: 1rem;
+  --text-md--line-height: 1.5;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.05), 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-lift: 0 10px 30px -12px rgb(15 23 42 / 0.25);
+}

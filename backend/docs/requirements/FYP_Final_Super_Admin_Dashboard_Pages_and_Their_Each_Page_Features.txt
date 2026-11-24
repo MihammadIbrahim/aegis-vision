@@ -1,0 +1,164 @@
+### **Page 1: Super Admin Login**
+*(Reference: Master Requirements Specification — Section 4 & Section 9.1)*
+
+The platform-level authentication gateway exclusively dedicated to the Platform Super Admin.
+
+1. **Username Input Field:** Text input field to enter the configured Super Admin username.
+2. **Password Input Field:** Masked input field to enter the Super Admin password (includes Show/Hide password toggle).
+3. **Remember Me / Session Persistence:** Checkbox option to persist authenticated browser session state.
+4. **Sign In Action Button:** Submits credentials to the FastAPI backend API for authentication and secure token (JWT) issuance.
+5. **Validation & Security Error Alerts:**
+   - Displays clear error messages on invalid credentials (*"Invalid username or password"*).
+   - Rate-limiting feedback or temporary lockout alerts upon consecutive failed attempts.
+6. **Strict Architecture & Document Rules:**
+   - **No Email OTP:** Super Admin login strictly bypasses email OTP verification (*Section 4 & Section 9.1*).
+   - **No Sign-Up / Registration:** No public account creation options.
+   - **No Forgot / Reset Password Link:** No self-service reset options on the login screen; recovery is handled exclusively via server environment variables (`.env`).
+
+---
+
+### **Page 2: Dashboard (Platform Overview)**
+*(Reference: Master Requirements Specification — Section 4, Section 14 & Section 18)*
+
+The primary landing screen providing a high-level operational and statistical overview across all onboarded organizations.
+
+1. **Total Organizations Counter Card:** Displays the cumulative number of registered organizations across the platform (*Section 4*).
+2. **Organization Status Breakdown Card:** Categorized breakdown showing Active, Inactive, and Suspended organizations (*Section 22*).
+3. **Total Platform Connected Cameras (Aggregated Metric):** Displays the total count of connected CCTV cameras across all organizations (aggregated statistic only; no video streams).
+4. **Platform System Health Quick Status:** Real-time health badge summarizing overall microservice status (*e.g., "All Systems Operational" or "1 Service Degraded"*).
+5. **Platform AI Modules Overview Card:** High-level summary of globally enabled core and optional AI modules (*Section 14*).
+6. **Recent Platform Audit Activity Feed:** A summary feed showing the 5–10 most recent platform-level events (e.g., new organization onboarded, admin contact updated, status changes) (*Section 18*).
+7. **Quick Action Navigation Shortcuts:** Direct action links leading to *"Organization Management"*, *"Platform AI Settings"*, and *"System Health Monitoring"*.
+8. **Strict Privacy Boundary:** Absolutely no live CCTV camera feeds, recorded videos, event clips, or snapshots are displayed on this dashboard (*Section 4*).
+
+---
+
+### **Page 3: Organization Management**
+*(Reference: Master Requirements Specification — Section 4, Section 8 & Section 22)*
+
+The centralized administrative directory used to manage all tenant organizations registered on the platform.
+
+1. **Organizations Master Table:** Paginated table listing all organizations with the following data attributes:
+   - Organization ID / Unique Code
+   - Organization Name
+   - Official Email & Phone Number
+   - Main Admin Name & Username
+   - Total Approved Branches / Workspaces Count
+   - Total Connected Cameras Count
+   - Status Badge (*Active / Inactive / Suspended*)
+   - Registration / Onboarding Date
+   - Action Button: *"View Details"*
+2. **Live Search Bar:** Real-time search filter by Organization Name, Official Email, or Unique Organization Code.
+3. **Status Filter Dropdown:** Filter organizations by operational status (*All, Active, Suspended, Inactive*).
+4. **Column Sorting:** Sort table records by Name, Registration Date, or Total Camera Count.
+5. **Export Organizations Summary:** Allows downloading the master organization directory in CSV or Excel format.
+
+---
+
+### **Page 4: Organization Details**
+*(Reference: Master Requirements Specification — Section 4, Section 5 & Section 22)*
+
+The comprehensive profile view for a selected organization, enabling platform-level administrative oversight.
+
+1. **Organization Profile Overview:**
+   - Displays Organization Name, Unique Code, Official Email, Phone Number, Registered Address, and Onboarding Date.
+   - Current status badge indicator (*Active / Suspended*).
+2. **Approved Branches & Infrastructure Breakdown:**
+   - List of all approved branches/sites belonging to the organization (*Section 3*).
+   - Statistical counts of buildings, areas/zones, and connected cameras per branch.
+3. **Organization Admin Information & Edit Panel (*Section 4*):**
+   - Displays Main Admin credentials: Full Name, Username, Official Email, and Contact Number.
+   - **Edit Admin Details Action:** Allows Super Admin to update the Organization Admin's contact information.
+   - **Strict Privacy Rule:** The Super Admin can never view an Organization Admin’s existing password (*Section 4*).
+4. **Organization Status Control (*Section 22*):**
+   - Controls to update organization operational state: *Activate*, *Deactivate*, or *Suspend*.
+5. **Sensitive Action Password Prompt:** Mandatory prompt requiring the Super Admin to re-enter their **Current Password** before confirming sensitive changes (such as status updates or admin edits) (*Section 4*).
+6. **Strict CCTV & Privacy Isolation:** Super Admin has no access to an organization’s live camera feeds, recorded footage, incident chat logs, or investigation evidence (*Section 4*).
+
+---
+
+### **Page 5: Platform AI Availability & Settings**
+*(Reference: Master Requirements Specification — Section 4, Section 14, Section 14A, 14B & 14C)*
+
+Global platform-level controls to manage which AI models and services are operational across the system.
+
+1. **Core Computer Vision Modules Global Switches:**
+   - Platform-wide toggles to enable or disable core CV capabilities (*Section 14*):
+     - *Human Detection & Single-Camera Tracking*
+     - *Cross-Camera Person Re-Identification (Re-ID)*
+     - *Weapon Detection*
+     - *Fight / Violence Detection*
+2. **Optional & Extended AI Services Controls:**
+   - Global toggle for *Restricted-Area Face Recognition* (*Section 14.5*).
+   - Global availability toggle for the *RAG-Based Security Assistant* (*Section 14A*).
+   - Global availability toggle for the *Agentic Incident Investigation Workflow* (*Section 14B*).
+3. **Platform-Wide Default AI Parameters:**
+   - Configuration of default inference confidence thresholds and task queue processing policies.
+4. **Save Settings Confirmation:** Updates require re-entering the Super Admin password to prevent unauthorized or accidental global configuration changes (*Section 4*).
+
+---
+
+### **Page 6: Platform System Health**
+*(Reference: Master Requirements Specification — Section 2 & Section 4)*
+
+Real-time infrastructure and microservices health monitoring dashboard.
+
+1. **Microservices Status Grid:** Live operational status cards (*Operational, Degraded, Down*) for all decoupled architecture services (*Section 2*):
+   - **Core API Service (FastAPI):** Uptime, health check response status, and API latency.
+   - **Video Ingestion Service:** Status of stream workers and active video pipelines.
+   - **Computer Vision Workers:** Inference queue health, worker availability, and task throughput.
+   - **Message Broker (RabbitMQ):** Active message queues, unacknowledged queue backlog, and broker connectivity.
+   - **Database (PostgreSQL & pgvector):** DB connection pool utilization and query response latency.
+   - **Object / Video Storage (Azure Blob / Object Store):** Cloud storage connectivity and read/write availability.
+2. **Storage Capacity & Retention Warnings:** Storage utilization monitors with early warnings when disk capacity reaches warning thresholds (*Section 17*).
+3. **Service Uptime & Latency Metrics:** Numerical uptime percentages and average response times per service.
+4. **Critical Error & Failure Stream:** A real-time incident feed highlighting background worker errors or dropped services.
+5. **Manual Health Refresh Button:** Triggers an immediate ping to all health check endpoints.
+
+---
+
+### **Page 7: Platform Audit Logs**
+*(Reference: Master Requirements Specification — Section 4 & Section 18)*
+
+A tamper-evident, centralized audit log tracking platform-level administrative operations.
+
+1. **Platform Audit Trail Table:** Tabular log history displaying the following fields:
+   - **Timestamp:** Exact date and time of the logged event.
+   - **Actor Account:** The acting account (Super Admin, Organization Admin, or System Worker).
+   - **Target Organization:** The organization associated with the action.
+   - **Action Category / Event:** The exact action performed (e.g., *Organization Onboarded, Admin Profile Updated, Organization Suspended, Global AI Module Toggled, Password Reset Event*).
+   - **IP Address & Client Info:** Network origin and client user-agent metadata.
+   - **Status / Outcome:** Success or Failure.
+2. **Filter & Search Controls:**
+   - Filter logs by Organization Name.
+   - Filter by Action Category.
+   - Date range selector (Start Date – End Date).
+3. **Export Audit Logs:** Export filtered audit trails in CSV or PDF formats for external compliance and reporting.
+4. **Strict Security & Privacy Enforcement (*Section 18*):**
+   - Passwords, OTPs, secret tokens, and authentication keys are strictly never logged or displayed.
+   - Platform Super Admin sees platform oversight logs, but cannot access organizational live CCTV streams, video recordings, or incident chat content (*Section 18*).
+
+---
+
+### **Page 8: Profile & Security Settings**
+*(Reference: Master Requirements Specification — Section 4 & Section 9.4)*
+
+Personal account security, credential updates, and session management for the Platform Super Admin.
+
+1. **Super Admin Profile Information View:**
+   - Displays current Username and System Role badge (*"Platform Super Admin"*).
+   - Displays account creation date and last authenticated timestamp.
+2. **Update Username Section:**
+   - Text input for New Username.
+   - **Current Password Verification:** Re-entering the current password is required to authorize the username change.
+   - *"Save Username"* action button.
+3. **Change / Reset Password Section:**
+   - **Current Password Input Field:** Required field to verify identity.
+   - **New Password Input Field:** Input for the new secure password.
+   - **Confirm New Password Input Field:** Confirmation matching the new password.
+   - **Password Strength Indicator:** Real-time feedback validating length, complexity, and character requirements.
+   - *"Update Password"* action button.
+4. **Active Sessions & Security Overview:**
+   - Displays current active session information (IP address, operating system, browser, login time).
+   - *"Terminate Other Sessions"* button to revoke all other active JWT/session tokens.
+5. **Secure Configuration Notice:** Informational reference noting that root credentials and seed parameters are securely anchored in the backend environment configuration (`.env`).

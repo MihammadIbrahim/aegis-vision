@@ -1,0 +1,7 @@
+# Read-only AI Investigation & Security Analytics Chatbot engine (decision D-027).
+# Imported in-process by core_api (pip install -e backend/services/ai_rag_and_agent); no SOP / PDF / vector store,
+# no LangChain or LangGraph (the D-027 design removed document RAG and the approval-to-execute agent).
+httpx==0.28.1
+# Tests
+pytest==9.2.0
+pytest-asyncio==1.4.0

@@ -1,0 +1,6 @@
+# NOTE: ffmpeg is a system package (installed in the Dockerfile via apt), not a pip package.
+httpx==0.28.1
+pydantic==2.14.1
+pydantic-settings==2.16.1
+pyyaml==6.0.3
+pytest==9.2.0

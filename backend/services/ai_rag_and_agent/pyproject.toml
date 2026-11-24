@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cctv-assistant-engine"
+version = "0.1.0"
+description = "Read-only AI Investigation & Security Analytics Chatbot engine (decision D-027)"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.27"]
+
+[tool.setuptools]
+packages = ["assistant_engine"]
+
+[tool.setuptools.package-data]
+assistant_engine = ["py.typed"]

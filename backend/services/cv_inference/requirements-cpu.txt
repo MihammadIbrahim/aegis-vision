@@ -1,0 +1,15 @@
+# CPU build for local development (no NVIDIA GPU)
+onnxruntime==1.31.0
+opencv-python-headless==5.0.0.93
+numpy==2.4.6
+scipy==1.17.1  # Hungarian assignment for the ByteTrack-style tracker (supervision 0.31 no longer ships ByteTrack)
+pika==1.4.4
+redis==8.1.0
+sqlalchemy==2.1.6
+psycopg[binary]==3.3.6
+pgvector==0.3.6  # stores 512-D Re-ID embeddings for Person Search
+httpx==0.28.1  # sends detection events to Core API
+pydantic==2.14.1
+pydantic-settings==2.16.1
+pyyaml==6.0.3  # optional CV_CONFIG_FILE
+faiss-cpu==1.16.0  # Re-ID gallery (exact cosine search); faiss-gpu-cu12 on the GPU image if preferred

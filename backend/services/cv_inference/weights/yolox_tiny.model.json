@@ -1,0 +1,18 @@
+{
+  "name": "yolox-tiny-coco",
+  "version": "0.1.1rc0",
+  "format": "yolox-grid-v1",
+  "file": "yolox_tiny.onnx",
+  "sha256": "427cc366d34e27ff7a03e2899b5e3671425c262ea2291f88bb942bc1cc70b0f7",
+  "input_name": "images",
+  "input_height": 416,
+  "input_width": 416,
+  "strides": [8, 16, 32],
+  "num_classes": 80,
+  "person_class_index": 0,
+  "pad_value": 114,
+  "source": "https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0/yolox_tiny.onnx",
+  "code_license": "Apache-2.0 (Megvii-BaseDetection/YOLOX)",
+  "weights_license": "Not stated separately by the publisher. Trained on COCO 2017 (annotations CC BY 4.0; images under various Flickr licences). Development and evaluation use; check before redistributing in a commercial product.",
+  "reference_metrics": "COCO val2017 mAP 0.5:0.95 = 32.8 at 416x416 (publisher's figure, not measured by this project)"
+}

@@ -1,0 +1,60 @@
+# Fight / violence detection — Video Swin Transformer (tiny), Kinetics-400 pre-trained, on 16-frame clips.
+task: violence_classification
+name: fight_swin3d_t
+project: experiments/runs
+seed: 42
+deterministic: false
+
+model:
+  backbone: swin3d_t      # swin3d_t | swin3d_s | mvit_v2_s | r2plus1d_18
+  pretrained: true        # Kinetics-400 weights (downloaded by torchvision on first use)
+  dropout: 0.3
+
+clip:
+  clip_len: 16
+  target_fps: 8           # 16 frames = 2 s of video; keep CV_SAMPLE_FPS near this value at runtime
+  size: 160               # 160² crops: swin3d_t fits batch 16 in 16 GB with bf16; use 224 on a 4090 (batch 8)
+  resize_short: 182
+  windows_per_video_eval: 5
+  clip_stride_seconds: 1.0
+
+data:                     # several datasets are combined; each keeps its own split rule (see video_clips.py)
+  - root: datasets/raw/RWF-2000
+    layout: rwf2000
+  - root: datasets/raw/RLVS
+    layout: rlvs
+  - root: datasets/raw/UCF-Crime
+    layout: ucfcrime
+    ucf_extended: false   # Fighting + Assault only; true also adds Abuse and Robbery
+split_ratios: [0.7, 0.15, 0.15]   # for datasets without an official split
+
+augment:                  # CctvAugmentConfig; same parameters across every frame of a clip
+  low_light_p: 0.5
+  gamma_limit: [50, 150]
+  compression_p: 0.5
+  jpeg_quality: [25, 90]
+  noise_p: 0.4
+  motion_blur_p: 0.3
+  perspective_p: 0.3
+  grey_p: 0.1
+
+train:
+  epochs: 30
+  batch_size: 16
+  workers: 8
+  device: auto            # cuda | cpu | auto
+  precision: auto         # bf16 on RTX 40-series, fp16 on older GPUs, fp32 on CPU
+  lr: 0.0001
+  backbone_lr_scale: 0.1  # trunk at 1e-5, new head at 1e-4
+  weight_decay: 0.05
+  warmup_epochs: 2
+  label_smoothing: 0.1
+  grad_clip: 1.0
+  balanced_sampling: true
+  select_by: roc_auc      # roc_auc | pr_auc | f1 on val
+  patience: 8
+
+eval:
+  threshold: auto         # chosen on val (best F1), or a number
+  max_false_alarm_rate: null   # e.g. 0.05 to cap false alarms on normal clips when choosing the threshold
+  video_reduce: mean

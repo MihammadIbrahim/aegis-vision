@@ -1,0 +1,65 @@
+{
+  "manifest_version": 1,
+  "version": "test",
+  "framework": "onnx test graph",
+  "file": "reid_dummy.onnx",
+  "sha256": "5ffabdc4116aaed7197a81f8ea159ec61f15c72899bcc7e531174eb7e3bfc0d0",
+  "size_bytes": 6369,
+  "dataset": {
+    "note": "none: synthetic test graph"
+  },
+  "training": {
+    "commit": null,
+    "finished_at": null
+  },
+  "metrics": {},
+  "export": {
+    "opset": 17,
+    "dynamic_batch": true,
+    "simplified": false,
+    "parity_max_abs_diff": 0.0,
+    "parity_tolerance": 0.0001,
+    "parity_passed": true,
+    "exported_at": "2026-11-14T00:00:00+00:00",
+    "exporter": "tests/fixtures/make_dummy_models.py"
+  },
+  "license": "test fixture, not a model",
+  "name": "reid-dummy",
+  "task": "person_reid",
+  "architecture": "test graph",
+  "input": {
+    "name": "images",
+    "shape": [
+      "batch",
+      3,
+      64,
+      32
+    ],
+    "layout": "NCHW",
+    "color_order": "RGB",
+    "scale": 0.00392156862745098,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "output": {
+    "name": "embeddings",
+    "shape": [
+      "batch",
+      512
+    ],
+    "format": "l2-normalized-embedding"
+  },
+  "class_labels": [],
+  "thresholds": {
+    "likely_match": 0.9,
+    "uncertain": 0.6
+  }
+}

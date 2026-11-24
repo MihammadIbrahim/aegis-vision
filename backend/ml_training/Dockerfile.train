@@ -1,0 +1,24 @@
+# Training image for the GPU server (RTX 4080 / 4090). Datasets and runs are mounted, never baked in.
+#
+#   docker build -f Dockerfile.train -t cctv-train .
+#   docker run --gpus all --shm-size=16g -v $PWD/datasets:/work/datasets -v $PWD/experiments:/work/experiments \
+#       cctv-train python -m training_scripts.train_fight_detector --config configs/fight_video_swin.yaml train.device=cuda
+FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3.11 python3.11-venv python3-pip git ffmpeg libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
+COPY requirements-train.txt .
+RUN python3.11 -m pip install --upgrade pip \
+    && python3.11 -m pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cu124 \
+    && python3.11 -m pip install -r requirements-train.txt \
+    && python3.11 -m pip uninstall -y onnxruntime && python3.11 -m pip install onnxruntime-gpu==1.31.0
+
+COPY . .
+RUN python3.11 -m pytest -q -m "not slow"   # the image must pass the CPU tests before any training
+
+ENTRYPOINT ["python3.11"]
+CMD ["-m", "pytest", "-q"]

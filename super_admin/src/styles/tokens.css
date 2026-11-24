@@ -1,0 +1,222 @@
+/* Design tokens for the Organization Admin and Supervisor app. Main surfaces are sampled from the
+ * owner's reference designs: light = charcoal #252525 sidebar, blue gradient header, white page and
+ * cards (banking-dashboard reference); dark = #353A50 rail and cards on #2A2F42 (approved 2026-11-01).
+ *
+ * Light values live in :root, dark values in [data-theme="dark"]. Components use only these variables,
+ * never raw colours, so both themes stay consistent. Every foreground/background pair the app uses is
+ * checked for WCAG AA contrast by src/test/contrast.test.ts; change a colour, run the tests. */
+
+:root {
+  color-scheme: light;
+
+  /* Brand and actions */
+  --color-primary: #0673a8;
+  --color-primary-hover: #06659a;
+  --color-on-primary: #ffffff;
+  --color-secondary: #4a4a4a;
+  --color-accent: #00adef;
+  --color-on-accent: #0b1520;
+  --color-link: #2f64a8;
+  --color-danger-solid: #b91c1c;
+  --color-danger-solid-hover: #991b1b;
+  --color-on-danger: #ffffff;
+  --color-disabled-bg: #eef1f4;
+  --color-disabled-text: #555e69;
+
+  /* Surfaces */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-surface-hover: #f2f8fd;
+  --color-surface-header: #eef6fc;
+
+  /* Text */
+  --color-text: #252525;
+  --color-text-secondary: #444444;
+  --color-text-muted: #6b6b6b;
+
+  /* Lines and inputs */
+  --color-border: #e3e8ef; /* decorative dividers only */
+  --color-border-strong: #87919e; /* input and control borders: at least 3:1 */
+  --color-input-bg: #ffffff;
+  --color-focus: #2563eb;
+
+  /* Header: the reference's blue gradient, deepened so white text meets AA at both ends. */
+  --color-topbar-bg: #0779b0; /* gradient start */
+  --color-topbar-end: #2e5c9e; /* gradient end */
+  --color-topbar-text: #ffffff;
+  --color-topbar-link: #ffffff;
+  --color-topbar-control-bg: #ffffff;
+  --color-topbar-control-text: #0673a8;
+  --color-topbar-control-border: #ffffff;
+  --color-sidebar-focus: #00adef;
+
+  /* Navigation */
+  --color-sidebar-bg: #252525;
+  --color-sidebar-brand: #ffffff;
+  --color-sidebar-text: #b8b8b8;
+  --color-sidebar-active-bg: #00adef;
+  --color-sidebar-active-text: #0b1520;
+
+  /* Feedback (solid text colours on the surface, and notice tints) */
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+  --color-info: #0369a1;
+  --color-success-bg: #e6f4ea;
+  --color-success-text: #166534;
+  --color-warning-bg: #fef3e2;
+  --color-warning-text: #92400e;
+  --color-danger-bg: #fde8e8;
+  --color-danger-text: #991b1b;
+  --color-info-bg: #e7f1fa;
+  --color-info-text: #075985;
+
+  /* Security statuses: badge text / badge background (always shown with a label, later an icon) */
+  --status-normal-fg: #475569;
+  --status-normal-bg: #eef1f4;
+  --status-new-fg: #1e40af;
+  --status-new-bg: #e7eefc;
+  --status-acknowledged-fg: #155e75;
+  --status-acknowledged-bg: #e2f3f7;
+  --status-responding-fg: #115e59;
+  --status-responding-bg: #e3f4f2;
+  --status-resolved-fg: #166534;
+  --status-resolved-bg: #e6f4ea;
+  --status-warning-fg: #92400e;
+  --status-warning-bg: #fef3e2;
+  --status-unauthorized-fg: #9a3412;
+  --status-unauthorized-bg: #fdebdd;
+  --status-critical-fg: #991b1b;
+  --status-critical-bg: #fde8e8;
+  --status-unknown-fg: #5b21b6;
+  --status-unknown-bg: #f1eafe;
+  --status-inactive-fg: #5b6b80;
+  --status-inactive-bg: #f1f5f9;
+
+  /* Typography */
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --text-xs: 0.75rem; /* 12 */
+  --text-sm: 0.8125rem; /* 13 */
+  --text-base: 0.875rem; /* 14 */
+  --text-md: 1rem; /* 16 */
+  --text-lg: 1.125rem; /* 18 */
+  --text-xl: 1.25rem; /* 20 */
+  --text-2xl: 1.5rem; /* 24 */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --leading: 1.5;
+
+  /* Spacing (4 px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Shape and depth */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+  --shadow-1: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-2: 0 8px 24px rgba(15, 23, 42, 0.12);
+
+  /* Layout */
+  --sidebar-width: 248px;
+  --sidebar-width-collapsed: 64px;
+  --topbar-height: 56px;
+  --content-max: 1440px;
+  --form-max: 760px;
+  --control-height: 36px;
+  --control-height-sm: 32px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-primary: #38b6ff;
+  --color-primary-hover: #6cc8ff;
+  --color-on-primary: #14182a;
+  --color-secondary: #b3b7c8;
+  --color-accent: #ef42cf;
+  --color-on-accent: #14182a;
+  --color-link: #6cc8ff;
+  --color-danger-solid: #f07a70;
+  --color-danger-solid-hover: #f49a92;
+  --color-on-danger: #14182a;
+  --color-disabled-bg: #454b65;
+  --color-disabled-text: #d0d3de;
+
+  --color-bg: #2a2f42;
+  --color-surface: #353a50;
+  --color-surface-elevated: #3d4359;
+  --color-surface-hover: #3a4057;
+  --color-surface-header: #30354a;
+
+  --color-text: #f5f6fa;
+  --color-text-secondary: #d0d3de;
+  --color-text-muted: #b3b7c8;
+
+  --color-border: #454b65;
+  --color-border-strong: #80869f;
+  --color-input-bg: #2a2f42;
+  --color-focus: #7db4ff;
+
+  --color-topbar-bg: #2a2f42;
+  --color-topbar-end: #2a2f42;
+  --color-topbar-text: #d0d3de;
+  --color-topbar-link: #6cc8ff;
+  --color-topbar-control-bg: #353a50;
+  --color-topbar-control-text: #38b6ff;
+  --color-topbar-control-border: #38b6ff;
+  --color-sidebar-focus: #38b6ff;
+  --color-sidebar-bg: #353a50;
+  --color-sidebar-brand: #ffffff;
+  --color-sidebar-text: #d0d3de;
+  --color-sidebar-active-bg: #454b65;
+  --color-sidebar-active-text: #ffffff;
+
+  --color-success: #5cd69b;
+  --color-warning: #f2b95a;
+  --color-danger: #ffa39b;
+  --color-info: #6cc8ff;
+  --color-success-bg: #24443f;
+  --color-success-text: #8de3b6;
+  --color-warning-bg: #4a3f2b;
+  --color-warning-text: #f5c878;
+  --color-danger-bg: #4d2e3a;
+  --color-danger-text: #ffb3ac;
+  --color-info-bg: #22405a;
+  --color-info-text: #9ad8ff;
+
+  --status-normal-fg: #d0d3de;
+  --status-normal-bg: #454b65;
+  --status-new-fg: #a9d8ff;
+  --status-new-bg: #24405f;
+  --status-acknowledged-fg: #9be3f0;
+  --status-acknowledged-bg: #1f4650;
+  --status-responding-fg: #8ee6d6;
+  --status-responding-bg: #1f4845;
+  --status-resolved-fg: #8de3b6;
+  --status-resolved-bg: #24443f;
+  --status-warning-fg: #f5c878;
+  --status-warning-bg: #4a3f2b;
+  --status-unauthorized-fg: #ffbd8a;
+  --status-unauthorized-bg: #4d3527;
+  --status-critical-fg: #ffb3ac;
+  --status-critical-bg: #4d2e3a;
+  --status-unknown-fg: #d9c4ff;
+  --status-unknown-bg: #3e3364;
+  --status-inactive-fg: #c2c6d4;
+  --status-inactive-bg: #3d4359;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.5);
+}

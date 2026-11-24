@@ -1,0 +1,73 @@
+{
+  "manifest_version": 1,
+  "version": "test",
+  "framework": "onnx test graph",
+  "file": "weapon_dummy.onnx",
+  "sha256": "854905456cf307a6a482b65265f48b81ab3c10a0dbf3702e3302f847740c3a07",
+  "size_bytes": 592,
+  "dataset": {
+    "note": "none: synthetic test graph"
+  },
+  "training": {
+    "commit": null,
+    "finished_at": null
+  },
+  "metrics": {},
+  "export": {
+    "opset": 17,
+    "dynamic_batch": true,
+    "simplified": false,
+    "parity_max_abs_diff": 0.0,
+    "parity_tolerance": 0.0001,
+    "parity_passed": true,
+    "exported_at": "2026-11-14T00:00:00+00:00",
+    "exporter": "tests/fixtures/make_dummy_models.py"
+  },
+  "license": "test fixture, not a model",
+  "name": "weapon-dummy",
+  "task": "weapon_detection",
+  "architecture": "test graph",
+  "input": {
+    "name": "images",
+    "shape": [
+      "batch",
+      3,
+      64,
+      64
+    ],
+    "layout": "NCHW",
+    "color_order": "RGB",
+    "scale": 0.00392156862745098,
+    "mean": [
+      0,
+      0,
+      0
+    ],
+    "std": [
+      1,
+      1,
+      1
+    ],
+    "letterbox_pad_value": 114
+  },
+  "output": {
+    "name": "output0",
+    "shape": [
+      "batch",
+      6,
+      3
+    ],
+    "format": "ultralytics-detect-v1",
+    "box_format": "xywh-pixels"
+  },
+  "class_labels": [
+    "handgun",
+    "knife"
+  ],
+  "thresholds": {
+    "score": 0.4,
+    "nms_iou": 0.6,
+    "score_handgun": 0.5,
+    "score_knife": 0.8
+  }
+}

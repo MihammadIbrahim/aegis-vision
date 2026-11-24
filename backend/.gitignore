@@ -1,0 +1,77 @@
+# --- Python & virtual environments ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+/env/
+services/*/env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# --- Secrets (real values live only in your local .env; only .env.example is committed) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*service-account*.json
+firebase-service-account*.json
+*firebase*adminsdk*.json
+kaggle.json
+
+# --- Local storage & media (never commit footage, evidence or one-time codes) ---
+# Anchored to runtime roots: src/infrastructure/storage and k8s/base/storage are source code.
+/storage/
+/services/*/storage/
+cctv_storage/
+/recordings/
+/services/*/recordings/
+/evidence/
+/services/*/evidence/
+/live/
+/services/*/live/
+/frames/
+/services/*/frames/
+.dev_outbox/
+*.mp4
+*.avi
+*.mkv
+
+# --- Heavy ML artifacts: datasets, runs, weights, checkpoints, archives ---
+ml_training/datasets/*
+!ml_training/datasets/README.md
+!ml_training/datasets/.gitkeep
+ml_training/runs/
+ml_training/outputs/
+ml_training/weights/
+ml_training/experiments/*
+!ml_training/experiments/.gitkeep
+!ml_training/experiments/model_registry.md
+# Downloaded model weights; keep the README, .gitkeep and the small JSON manifests that describe them.
+services/cv_inference/weights/*
+!services/cv_inference/weights/README.md
+!services/cv_inference/weights/.gitkeep
+!services/cv_inference/weights/*.model.json
+*.pt
+*.pth
+*.onnx
+# Tiny generated test graphs only (not models): services/cv_inference/tests/fixtures/make_*.py
+!services/cv_inference/tests/fixtures/*.onnx
+*.engine
+*.safetensors
+*.bin
+*.gguf
+*.ckpt
+*.tar
+*.tar.gz
+*.zip
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store

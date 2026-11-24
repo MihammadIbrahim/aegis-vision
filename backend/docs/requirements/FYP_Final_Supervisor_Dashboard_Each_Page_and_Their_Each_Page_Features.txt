@@ -1,0 +1,383 @@
+### **1. Dashboard (Operational Overview)**
+
+1. **Total Cameras Counter** — Displays total count of cameras in the authorized workspace (*Section 13*).
+2. **Active / Online Cameras Counter** — Real-time count of connected cameras actively streaming (*Section 13, Section 21*).
+3. **Offline Cameras Counter** — Real-time count of disconnected or failing cameras (*Section 13, Section 21*).
+4. **Total Guards Counter** — Total number of guards registered under the supervisor's operational scope (*Section 6, Section 7*).
+5. **Active Guards Counter** — Count of guards currently active and available for deployment (*Section 7, Section 12*).
+6. **Total Alerts Counter** — Overall count of security alerts generated across configured modules (*Section 15.1*).
+7. **Critical / High-Priority Alerts Counter** — Tally of high-priority events (Weapon and Fight/Violence detections) (*Section 15.1*).
+8. **Pending Alerts Counter** — Count of alerts in `New` status awaiting acknowledgement or response (*Section 15.1*).
+9. **Active Incidents Counter** — Number of security incidents currently open and under active investigation (*Section 15.1, Section 16*).
+10. **Resolved Incidents Counter** — Total count of successfully resolved incident cases (*Section 15.1*).
+11. **Recent Alerts Feed** — Live-updating feed of latest security alerts with timestamps, priority badges, and locations (*Section 15.1*).
+12. **Recent Incidents Table** — Summary of active incident cases showing status, camera, and assigned responders (*Section 15.1, Section 16*).
+13. **Live CCTV Camera Preview Panel** — Quick preview thumbnails of priority camera feeds (*Section 13*).
+14. **Camera Status Overview** — Visual operational health breakdown of online vs. offline cameras (*Section 13*).
+15. **Guard Availability Status Panel** — Summary overview of active guards and their location assignments (*Section 3, Section 7*).
+16. **Recent Security Activity Feed** — Stream of recent operational events (guard responses, status updates, camera toggles) (*Section 18*).
+17. **Site / Branch Overview Indicator** — Displays current authorized workspace context (*Section 3, Section 6*).
+18. **AI Detection Summary** — Summary breakdown of active AI detections (Weapons, Violence, Tracking, Restricted Area) (*Section 14*).
+19. **High-Priority Incident Notification Banner** — Prominent visual banner triggered by critical weapon or violence detections (*Section 15.1*).
+20. **Security Incidents Trend Chart** — Visual trend chart displaying incident volume over days or weeks (*Section 15.1*).
+21. **Alerts by Type Distribution Chart** — Breakdown of alerts categorized by AI detection module (*Section 14, Section 15.1*).
+22. **Quick Actions** — Fast operational shortcuts: Acknowledge Alert, Escalate Alert, Dispatch Guard, and Person Search (*Section 6*).
+23. **Enforce Workspace Scope** — Restricts dashboard data strictly to the supervisor’s authorized workspace (*Section 3, Section 21*).
+
+---
+
+### **2. Live CCTV Monitoring**
+
+1. **Live Camera Feeds** — Displays real-time video streaming from authorized IP cameras (*Section 1, Section 13*).
+2. **Multi-Camera Grid View** — Simultaneous multi-channel monitoring on a single screen (*Section 13*).
+3. **Adjustable Grid Layouts** — Toggle between standard grid layouts: **1×1, 2×2, 3×3, and 4×4** (*Section 13*).
+4. **Fullscreen Camera View** — Expand any individual camera stream to full screen for focused observation (*Section 13*).
+5. **Camera Search** — Search feeds by Camera Display Name or unique Camera ID (*Section 13*).
+6. **Filter by Site / Branch** — Filter feeds by organizational campus or site (*Section 3, Section 13*).
+7. **Filter by Building / Outdoor Perimeter** — Filter cameras by physical building or outdoor boundary (*Section 3, Section 13*).
+8. **Filter by Floor** — Filter cameras by floor level (indoor buildings only) (*Section 3, Section 13*).
+9. **Filter by Area / Zone** — Filter cameras mapped to specific security zones (*Section 3, Section 13*).
+10. **Filter by Online / Offline Status** — Quickly isolate active streams or identify disconnected feeds (*Section 13*).
+11. **Camera Online / Offline Status Indicator** — Visual badge displaying whether each camera is online or offline (*Section 13, Section 21*).
+12. **Stream Connection / Error State Display** — Displays clear connection or RTSP loading error states (*Section 13, Section 21*).
+13. **Camera Display Name and Unique ID Overlay** — Clear on-screen identification of camera name and system ID (*Section 13*).
+14. **Hierarchical Location Display** — Shows mapped location (Site → Building → Floor → Area) on feed overlay (*Section 3, Section 13*).
+15. **Real-Time Camera Status Updates** — Instant visual update if a camera disconnects or reconnects (*Section 13, Section 21*).
+16. **Human Detection Visual Indicators** — Displays detection boxes on frames when humans are identified (*Section 14.1*).
+17. **Single-Camera Person Tracking Overlays** — Visual track IDs following person trajectories within that camera’s view (*Section 14.1*).
+18. **AI Detection Confidence Scores** — Displays confidence scores for active detections where available (*Section 4 Layer 1, Section 14*).
+19. **Detection Timestamp Overlay** — Precise date and time overlay on video frames (*Section 4 Layer 1, Section 15.1*).
+20. **Weapon Detection Visual Alert Indicator** — High-priority visual border/badge when potential weapons are flagged (*Section 14.3, Section 15.1*).
+21. **Fight / Violence Detection Visual Indicator** — Visual indicator when fighting or violent activity is detected (*Section 14.4, Section 15.1*).
+22. **Active AI Detection Badges** — Indicates which AI modules are actively running on the feed (*Section 13, Section 14*).
+23. **Camera Details Quick Panel** — Flyout panel showing camera IP/RTSP info, location hierarchy, and assigned AI modules (*Section 13*).
+24. **Refresh Camera Feeds** — Reload active streams to clear lag or recover disconnected feeds (*Section 13*).
+25. **Total, Online, and Offline Counters** — Summary status counts header on the monitoring page (*Section 13*).
+26. **Empty & Error State Handling** — Clear UI feedback when cameras are offline or no results match filters (*Section 13, Section 21*).
+27. **Enforce Workspace Isolation** — Restricts monitoring strictly to cameras within the supervisor's authorized workspace (*Section 3, Section 21*).
+
+---
+
+### **3. Camera Monitoring & Status**
+
+1. **View Camera Status Table** — Displays comprehensive list of all assigned cameras and their operational parameters (*Section 6, Section 13*).
+2. **View Camera Operational Details** — View Camera ID, Display Name, Stream URL/IP, Location Mapping, and AI settings (*Section 13*).
+3. **Real-Time Online / Offline Status Indicator** — Live connection health indicator for every camera (*Section 13, Section 21*).
+4. **Add Camera** — Register a new camera within authorized operational permissions (*Section 6, Section 13*).
+5. **Edit Camera Details** — Update camera display name, RTSP stream parameters, and location link (*Section 6, Section 13*).
+6. **Remove Camera** — Remove a camera within authorized permissions (*Section 6, Section 13*).
+7. **Assign / Link Camera to Location** — Map camera to physical location (Building, Floor, Area/Zone) (*Section 3, Section 6, Section 13*).
+8. **Configure Location Boundaries** — Designate boundary orientation as North, South, East, West, or Custom (*Section 3*).
+9. **Set Boundary Type (Inside / Outside)** — Label boundary orientation for clear guard allocation (*Section 3*).
+10. **Enable / Disable Permitted AI Modules per Camera** — Supervisor toggles permitted AI modules on individual cameras (*Section 6, Section 13, Section 14*).
+11. **View Active AI Modules Summary** — Overview of which AI modules are active on each camera (*Section 13, Section 14*).
+12. **RTSP / ONVIF Connection Health Test** — Test stream connectivity and diagnose feed issues (*Section 13*).
+13. **Search Cameras** — Search camera table by Name, ID, or IP (*Section 13*).
+14. **Filter Cameras** — Filter by Building, Floor, Area, or Connection Status (*Section 13*).
+15. **Enforce Workspace Isolation** — Cannot view or manage cameras outside authorized workspace (*Section 6, Section 21*).
+16. **Log Camera Actions in Audit Trail** — Automatically records all camera modifications and AI toggles in audit logs (*Section 5, Section 18*).
+
+---
+
+### **4. Alerts**
+
+1. **View All Security Alerts** — Displays all alerts generated by AI modules and manual escalations (*Section 15.1*).
+2. **View Alert Details** — Full modal/panel showing event details, metadata, snapshots, and responses (*Section 15.1*).
+3. **View Unique Alert ID** — System-generated identifier for precise tracking (*Section 15.1*).
+4. **View Alert Type** — Identifies event category (Weapon Detection, Fight/Violence, Restricted-Area, etc.) (*Section 15.1*).
+5. **View Alert Priority** — Visual priority rating (High Priority for Weapons and Fights) (*Section 15.1*).
+6. **View Alert Location** — Displays complete location hierarchy (Site, Building, Floor, Area) (*Section 3, Section 15.1*).
+7. **View Associated Camera** — Shows camera name, ID, and location where event occurred (*Section 13, Section 15.1*).
+8. **View Alert Timestamp** — Exact date and time when the detection was generated (*Section 15.1*).
+9. **View AI Confidence Score** — Displays detection confidence where available (*Section 4 Layer 1, Section 15.1*).
+10. **View Relevant Snapshot / Event Clip** — Embedded observation snapshot or recorded video clip (*Section 15.1, Section 17*).
+11. **View Assigned / Targeted Guards** — Shows guards who received the alert based on location (*Section 15.1, Section 15.2*).
+12. **Update Alert Status Workflow** — Update status across: **New → Acknowledged → Responding → Resolved → Supervisor Escalated → Dismissed** (*Section 6, Section 15.1*).
+13. **View Alert Response History** — Chronological audit trail of acknowledgements, status changes, and guard assessments (*Section 15.1*).
+14. **View Guard Response Assessment** — Displays guard assessments: **“Under Control”** or **“Additional Guards Required”** (*Section 15.3*).
+15. **Escalate Alert to All Eligible Guards** — Supervisor broadcasts alert organization-wide when situation demands (*Section 6, Section 15.4*).
+16. **Search and Target a Specific Guard** — Dispatch an assistance request to an individual chosen guard (*Section 15.4*).
+17. **Send Assistance Request by Location** — Dispatch alert to all guards in a specific building or area (*Section 15.4*).
+18. **View Guards Confirming “I’m Responding”** — Tracks which guards confirmed deployment to the location (*Section 15.4*).
+19. **Supervisor Recipient Override** — Supervisor can override or expand the recipient list when operational circumstances require it (*Section 6, Section 15.2*).
+20. **Access Incident-Specific Group Chat** — Open dedicated operational chat for the incident (*Section 15.5*).
+21. **View Alert-Related Escalation Requests** — Track secondary escalation broadcasts linked to the alert (*Section 15.4*).
+22. **Maintain Linkage Between Original and Escalated Alerts** — Retains clear relationship between initial alert and escalations (*Section 15.4*).
+23. **Search & Filter Alerts** — Search by Alert ID, Type, Camera, or Location; filter by Status, Priority, or Date (*Section 15.1*).
+24. **Enforce Workspace Isolation** — Restricts alert viewing to authorized workspace staff (*Section 3, Section 21*).
+25. **Record Alert Management Actions in Audit Logs** — Logs acknowledgements, escalations, recipient overrides, and dismissals (*Section 15.1, Section 18*).
+
+---
+
+### **5. Notifications**
+
+1. **View Notifications Feed** — Displays incoming operational security notifications (*Section 18*).
+2. **Receive High-Priority Alert Notifications** — Immediate notifications for critical weapon or violence detections (*Section 15.1*).
+3. **Receive Guard Assistance Requests** — Instant alert when a guard selects **“Additional Guards Required”** (*Section 15.4*).
+4. **Receive Guard Response Confirmations** — Notifies when guards confirm deployment via **“I’m Responding”** (*Section 15.4*).
+5. **Receive Manual Security Report Notifications** — Notifies supervisor when a guard files a manual incident report (*Section 7, Section 15.6*).
+6. **Receive Camera Disconnection / Failure Alerts** — Notifies when an authorized camera goes offline (*Section 13, Section 21*).
+7. **Receive Low-Storage Capacity Warnings** — Alerts supervisor when storage approaches full capacity (*Section 17*).
+8. **View Notification Details** — View actor, timestamp, affected location, and activity description (*Section 18*).
+9. **Direct Navigation to Linked Source** — Direct click-through to affected Alert, Incident, Guard, or Camera (*Section 18*).
+10. **Distinguish Read and Unread Notifications** — Visual indicators for unread alerts (*UI Feature*).
+11. **Mark Notifications as Read** — Clear unread status individually or in bulk (*UI Feature*).
+12. **Filter Notifications** — Filter by Date Range or Notification Type (*Section 18*).
+13. **Strictly Never Display Passwords, OTPs, or Secrets** — Strict security rule omitting authentication secrets (*Section 5, Section 18*).
+14. **Enforce Workspace Scope** — Supervisor receives notifications only for their authorized workspace (*Section 3, Section 21*).
+
+---
+
+### **6. Incident Management (Incidents & Investigations)**
+
+1. **View Incident Records List** — Displays active, escalating, and resolved incident cases (*Section 6, Section 16*).
+2. **Create New Investigation Case** — Open a formal investigation case (*Section 6, Section 16*).
+3. **Link Security Alert(s) to Incident** — Associate AI alerts or guard reports with an investigation (*Section 16*).
+4. **View Incident Details** — Displays incident ID, location, camera, timestamp, assigned staff, and notes (*Section 16*).
+5. **View Related AI Events** — Review detection events linked to the case (*Section 4 Layer 1, Section 16*).
+6. **View Supporting Evidence** — Access linked event clips, snapshots, and observation metadata (*Section 16, Section 17*).
+7. **Update Incident Status** — Transition status: **Open → Under Investigation → Responding → Resolved → Dismissed** (*Section 6, Section 15.1*).
+8. **Review Person-Search Results within Incident** — Inspect and verify candidate appearance matches (*Section 6, Section 16*).
+9. **Generate AI-Assisted Incident Summary** — Automated evidence-linked summary generated via LangGraph agent (*Section 4 Layer 3, Section 14B*).
+10. **Retrieve Relevant Security Policies** — Retrieves organizational SOPs relevant to the incident (*Section 4 Layer 3, Section 14B*).
+11. **View AI-Recommended Operational Steps** — Displays policy-grounded recommendations (*Section 4 Layer 3, Section 14B*).
+12. **Review AI Findings** — Human supervisor verifies AI signals before drawing conclusions (*Section 4 Layer 3, Section 14B*).
+13. **Mandatory Human Approval Checkpoint** — Approve or reject consequential actions proposed by AI (*Section 4 Layer 3, Section 14B*).
+14. **Execute Approved Consequential Actions** — Update incident status or broadcast notifications after human approval (*Section 4 Layer 3, Section 14B*).
+15. **Participate in Incident-Specific Group Chat** — Coordinate with guards and admin in dedicated incident chat (*Section 15.5*).
+16. **Preserve Investigation Records** — Retains linked case evidence even if staff accounts are removed (*Section 12, Section 16*).
+17. **Handle Missing or Conflicting Information** — Explicitly flags when footage is missing or cameras were offline (*Section 4 Layer 3, Section 16*).
+18. **Prevent Autonomous Identity Confirmation or Accusations** — AI signals remain decision support; never declares criminal guilt autonomously (*Section 1, Section 4 Layer 3*).
+19. **Record All Incident Actions in Audit Logs** — Logs case updates, status changes, and approvals (*Section 6, Section 18*).
+
+---
+
+### **7. Person Search**
+
+1. **Upload Reference Photo** — Upload an image of a target individual (*Section 6, Section 16*).
+2. **Search Available Live Observations** — Search active person detections across cameras (*Section 16*).
+3. **Search Retained CCTV Footage** — Search historical recordings across the configured retention period (*Section 16, Section 17*).
+4. **View Possible Person Matches** — Displays ranked list of appearance candidates (*Section 4 Layer 1, Section 16*).
+5. **View Match Score** — Displays confidence/similarity score for each candidate (*Section 16*).
+6. **View Associated Camera** — Identifies camera where match was detected (*Section 16*).
+7. **View Location Hierarchy** — Shows location (Building, Floor, Area) of candidate match (*Section 3, Section 16*).
+8. **View Observation Date and Time** — Exact timestamp of observed appearance (*Section 16*).
+9. **View Matching Snapshot Crop** — Extracted person crop from footage (*Section 16*).
+10. **View Relevant Video Clip** — Short video snippet showing candidate in context (*Section 16*).
+11. **View Match Classification (Likely Match / Uncertain)** — Distinguishes likely matches from uncertain results (*Section 16*).
+12. **Display Missing Footage or Offline Camera Limitations** — Highlights when cameras were offline or video is unavailable (*Section 16*).
+13. **Review and Verify Search Results** — Supervisor human review and verification of match candidates (*Section 6, Section 16*).
+14. **Link Relevant Result to Incident** — Attach verified search result to an open investigation (*Section 6, Section 16*).
+15. **Preserve Associated Alerts, Clips, and Snapshots** — Retains linked search evidence with the investigation (*Section 16*).
+16. **Enforce Organization and User Permissions** — Restricts search strictly to authorized organizational footage (*Section 3, Section 21*).
+17. **Prevent Unverified Identity Confirmation** — Low-confidence results cannot be marked as confirmed identity (*Section 1, Section 16*).
+18. **Record Person-Search Activities in Audit Logs** — Logs photo uploads, queries, and case attachments (*Section 6, Section 18*).
+
+---
+
+### **8. CCTV Recordings & Playback**
+
+1. **Access Normal CCTV Recordings Archive** — Browse recorded video archive from authorized cameras (*Section 17*).
+2. **Play Historical CCTV Footage** — Interactive video player for historical footage (*Section 17*).
+3. **Fast-Forward, Rewind, Pause, and Timeline Scrubbing** — Full playback navigation controls (*Section 17*).
+4. **View AI-Generated Event Clips on Timeline** — Filtered timeline access to video snippets generated during AI detections (*Section 17*).
+5. **Filter Recordings** — Filter by Camera, Location, and Date/Time Range (*Section 17*).
+6. **Configure Normal Footage Retention Duration** — Supervisor can change normal footage retention in **Minutes, Hours, or Days** (*Section 6, Section 17*).
+7. **Monitor Storage Capacity** — Displays current storage consumption (*Section 17*).
+8. **Receive Low-Storage Warnings** — Displays visual warnings when storage limits are approached (*Section 17*).
+9. **View Automatic Deletion Expiration Countdown** — Shows when routine footage will be purged (*Section 17*).
+10. **Save Evidence Clips Directly from Playback** — Extract and preserve clips for ongoing investigations (*Section 17*).
+11. **Preserve Investigation Evidence Beyond Expiry** — Evidence is never automatically deleted by routine retention (*Section 17*).
+12. **Enforce Workspace Video Isolation** — Restricts video access strictly to authorized workspace (*Section 3, Section 21*).
+13. **Record Footage Actions in Audit Logs** — Logs playback, retention modifications, and clip extraction (*Section 17, Section 18*).
+
+---
+
+### **9. Evidence Management**
+
+1. **View Saved Investigation Evidence List** — Displays all preserved evidence files across active cases (*Section 6, Section 17*).
+2. **View Evidence Details** — Shows evidence ID, linked incident, date, camera, and case notes (*Section 17*).
+3. **View Associated Snapshots and Video Clips** — Dedicated media viewer for preserved high-resolution evidence (*Section 17*).
+4. **Save New Evidence for an Investigation** — Save video clips or snapshots directly from alerts, footage, or search (*Section 6, Section 17*).
+5. **Update Saved Evidence Metadata** — Edit evidence descriptions, tags, and investigator notes (*Section 6, Section 17*).
+6. **Link Evidence to Incident / Investigation** — Associate evidence items with one or more open cases (*Section 16, Section 17*).
+7. **Preserve Evidence Separately from Normal CCTV Footage** — Stored independently from expiring routine footage (*Section 17*).
+8. **Retain Evidence Beyond Routine Footage Deletion** — Ensures critical evidence remains intact indefinitely until manually purged (*Section 17*).
+9. **Manually Delete Investigation Evidence (Authorized Permissions)** — Supervisor deletes evidence within permitted boundaries (*Section 6, Section 17*).
+10. **Search and Filter Evidence** — Search by Incident ID, Camera, Location, or Date (*Section 17*).
+11. **Restrict Evidence Access to Authorized Workspace** — Strict access controls preventing unauthorized visibility (*Section 3, Section 21*).
+12. **Record Evidence Actions in Audit Logs** — Every save, view, update, and delete action is recorded in audit logs (*Section 17, Section 18*).
+
+---
+
+### **10. Manual Security Reports**
+
+1. **View Submitted Manual Security Reports List** — Displays reports filed manually by guards via the mobile app (*Section 7, Section 15.6*).
+2. **View Report Details** — Full modal view showing report ID, guard ID, name, and submission time (*Section 7, Section 15.6*).
+3. **View Report Type / Category** — Categorization of reported event (*Section 7, Section 15.6*).
+4. **View Report Location** — Exact location hierarchy (Building, Floor, Area) reported by guard (*Section 3, Section 15.6*).
+5. **View Report Description** — Detailed text narrative submitted by guard (*Section 7, Section 15.6*).
+6. **View Attached Photo** — Display optional photographic evidence uploaded by the guard (*Section 7, Section 15.6*).
+7. **View Report Submission Status / Sync History** — Tracks whether report was uploaded live or queued offline and synced later (*Section 7, Section 15.6*).
+8. **Strictly Distinguish Manual Reports from AI-Generated Alerts** — Keeps guard reports separate from AI alerts (*Section 7, Section 15.6*).
+9. **Link Manual Security Report to an Incident Case** — Attach relevant guard reports directly to an investigation (*Section 15.6, Section 16*).
+10. **Search and Filter Reports** — Search by Guard, Type, Location, or Date Range (*Section 15.6*).
+11. **Enforce Authorized Workspace Scope** — Restricts reports strictly to the authorized workspace (*Section 3, Section 21*).
+12. **Log Manual Report Review in Audit Trail** — Records report review and case linkage in audit records (*Section 18*).
+
+---
+
+### **11. Guard Management**
+
+1. **View Guard List** — Displays all guards registered within the authorized workspace (*Section 6, Section 12*).
+2. **View Guard Profile and Details** — View Guard ID, Full Name, Username, Email, Phone, Status, and Assigned Location (*Section 9.3, Section 12*).
+3. **Add New Guard** — Enter guard details, assign location, and initiate account creation (*Section 6, Section 9.3*).
+4. **Assign Guard to Location via Hierarchical Dropdowns** — Assign to Building, Floor, and Area/Zone (location assignment is optional) (*Section 3, Section 6, Section 7, Section 9.3*).
+5. **Generate Unique Guard ID** — Automatically generates format `GRD-` + 11 numeric digits (*Section 9.3, Section 10*).
+6. **Verify Guard Email via Brevo Email OTP** — Sends OTP to guard's email, which supervisor enters to verify address (*Section 9.3*).
+7. **Verify Supervisor Password and Email OTP for Guard Creation** — Supervisor verifies own credentials to authorize account creation (*Section 9.3*).
+8. **Trigger Secure Password Setup for Guard** — Guard sets own password through secure setup; supervisor cannot view actual passwords (*Section 9.3, Section 9.6*).
+9. **Edit / Update Guard Information** — Update contact details and location assignments (*Section 6, Section 9.5*).
+10. **Verify Supervisor Password and Email OTP for Updates** — Supervisor re-authenticates to confirm updates (*Section 9.5*).
+11. **View Guard Account Status (Active / Left)** — Displays current employment state (*Section 12*).
+12. **Remove Guard Account (Deactivation)** — Disables login access; status becomes `Left`; records preserved on dashboard (*Section 6, Section 12*).
+13. **Enable / Disable Guard Login Access** — Manage app access without destroying historical data (*Section 12*).
+14. **Rejoin Existing Guard (Dedicated Flow)** — Dedicated "Rejoining" button separate from "Add Guard" (*Section 6, Section 11, Section 11.1*).
+15. **Retrieve Existing Guard Profile During Rejoining** — Enter Guard ID to pull existing profile and prevent duplicate accounts (*Section 11.1, Section 11.3*).
+16. **Update Permitted Guard Information During Rejoining** — Update contact details and location before confirming rejoining (*Section 11.1*).
+17. **Confirm Guard Rejoining via Supervisor Password** — Final confirmation requires supervisor password (no OTP required); returns account to `Active` (*Section 11.1, Section 12*).
+18. **Preserve Guard History Across Removal and Rejoining** — Historical alerts, incidents, and assignments remain linked to internal ID (*Section 11.1, Section 12*).
+19. **Regenerate Guard ID** — Supervisor regenerates ID (`GRD-` + 11 digits) using own password (no OTP); history remains linked (*Section 6, Section 10*).
+20. **Restrict Guard Records to Authorized Workspace** — Multi-tenant workspace data isolation (*Section 3, Section 21*).
+21. **Record Guard Management in Audit Logs** — Logs all guard creation, edits, removals, and status changes (*Section 6, Section 18*).
+22. **Notify Admin on Supervisor’s Guard Management** — Admin automatically receives a notification when a Supervisor creates, edits, or removes a Guard (*Section 5, Section 6, Section 18*).
+23. **Supervisor Blocked from Permanent Deletion** — Supervisors are strictly prevented from permanently deleting user data (*Section 6, Section 12*).
+
+---
+
+### **12. Building & Location Management**
+
+1. **View Organizational Location Hierarchy** — Tree/list view of Site/Branch → Building/Perimeter → Floor → Area/Zone (*Section 3*).
+2. **View Buildings and Outdoor Perimeters** — Displays physical structures and boundaries within authorized workspace (*Section 3*).
+3. **View Floors Associated with Buildings** — View floor breakdown for indoor buildings (*Section 3*).
+4. **View Areas and Security Zones** — View defined security areas across facilities (*Section 3*).
+5. **View Configured Location Boundaries** — View boundary directional designations (North, South, East, West, Custom) (*Section 3*).
+6. **View Boundary Orientation (Inside vs. Outside)** — Review boundary labels used for guard deployment (*Section 3*).
+7. **View Cameras Linked to Locations** — View all cameras mapped to each building, floor, or zone (*Section 3, Section 13*).
+8. **View Guards Assigned to Locations** — View security guards currently assigned to each area (*Section 3, Section 7*).
+9. **Hierarchical Location Data Provider for Guard Dispatch** — Supplies location data for alert targeting and guard allocation (*Section 3, Section 15.2*).
+10. **Enforce Workspace Location Isolation** — Prevents cross-workspace location exposure (*Section 3, Section 21*).
+
+---
+
+### **13. Authorized Persons — Entry Verification**
+
+1. **View Authorized Persons List** — Displays registered personnel authorized to enter restricted areas (*Section 8, Section 14.5, Section 19*).
+2. **View Authorized Person Details** — View Person ID, Full Name, Department, Access Schedule, and registered photo (*Section 8, Section 14.5*).
+3. **View Authorized Access Logs** — Review automatic access logs for high-confidence face recognitions (*Section 8, Section 14.5*).
+4. **Review Flagged Uncertain / Unknown Entry Events** — Human review queue for uncertain or low-confidence facial matches (*Section 8, Section 14.5*).
+5. **Verify or Dismiss Flagged Entry Events** — Supervisor reviews snapshot/clip and either verifies legitimate entry or dismisses false alarm (*Section 8, Section 14.5*).
+6. **Escalate Unauthorized Access Attempts** — Escalate suspicious or unverified entries into a high-priority security alert (*Section 8, Section 15.1*).
+7. **View Entry Snapshot Crop and Event Clip** — Inspect facial crop and contextual camera clip for verification (*Section 8, Section 14.5, Section 16*).
+8. **Search Entry Verification Logs** — Search logs by Person Name, ID, Date, or Restricted Area (*Section 8*).
+9. **Filter Logs by Verification Status** — Filter by Authorized Match, Pending Review, Dismissed, or Escalated (*Section 8*).
+10. **Prevent Treating Uncertain Matches as Confirmed Identities** — System enforces safeguard rule: low-confidence matches remain unverified (*Section 1, Section 8, Section 14.5*).
+11. **Enforce Restricted-Area Privacy & Security Controls** — Strict isolation ensuring records and logs are accessible only in authorized workspace (*Section 8, Section 21*).
+12. **Record Entry Verification Decisions in Audit Logs** — Logs all supervisor verification, dismissal, and escalation actions (*Section 18*).
+
+---
+
+### **14. AI Configuration**
+
+1. **View Permitted AI Modules for Organization** — View which modules have been permitted by the Organization Admin (*Section 6, Section 14*).
+2. **View Camera AI Module Status** — Overview of which cameras are actively executing which AI modules (*Section 6, Section 13*).
+3. **Enable / Disable Permitted AI Modules per Camera** — Supervisor toggles permitted modules on individual cameras (*Section 6, Section 13, Section 14*):
+   - Human Detection & Single-Camera Tracking
+   - Cross-Camera Person Re-Identification (Re-ID)
+   - AI Weapon Detection
+   - Fight / Violence Detection
+   - Restricted-Area Face Recognition
+4. **View High-Priority AI Alert Rules** — Displays rule mappings (Weapons and Fights automatically generate High Priority alerts) (*Section 14.3, Section 14.4, Section 15.1*).
+5. **View Camera Stream Health for AI Processing** — Monitor whether camera streams are functioning for AI inference (*Section 13, Section 21*).
+6. **Confirm AI Camera Toggles with Supervisor Password** — Secure verification when modifying camera AI settings (*Section 6*).
+7. **Enforce Permission Boundaries** — Supervisor cannot enable AI modules that are not permitted for the organization (*Section 6, Section 14*).
+8. **Log AI Configuration Toggles in Audit Trail** — All module toggles on cameras are automatically recorded in audit logs (*Section 5, Section 18*).
+
+---
+
+### **15. Security Assistant (AI Chatbot — RAG)**
+
+1. **Interactive Chatbot Interface** — Operational query interface for security supervisors (*Section 4 Layer 2, Section 14A*).
+2. **Query Approved Security Policies & SOPs** — Inquire about organizational protocols (weapon response, fight handling, escalation rules) (*Section 4 Layer 2, Section 14A*).
+3. **Query Authorized Incidents and Alerts** — Ask for summaries of unresolved incidents or active high-priority alerts (*Section 4 Layer 2, Section 14A*).
+4. **View Source References & Citations** — Responses include clickable citations to approved policy documents and database records (*Section 4 Layer 2, Section 14A*).
+5. **Grounded Answers with Explicit Uncertainty Limitations** — Chatbot explicitly states when policy or evidence is insufficient, preventing hallucinations (*Section 4 Layer 2, Section 14A*).
+6. **Permission-Checked Database Fact Retrieval** — Exact counts, statuses, and timestamps come directly from database queries, not guessed (*Section 4 Layer 2, Section 14A*).
+7. **Clear Chat Session History** — Reset active conversational context (*Section 14A*).
+8. **Enforce Organization and Role Scope** — Strict isolation ensuring supervisor cannot query data outside authorized workspace (*Section 4 Layer 2, Section 21*).
+9. **Log Assistant Queries and Retrieval Actions** — Queries and retrieved sources are logged for audit compliance (*Section 4 Layer 2, Section 18*).
+
+---
+
+### **16. Investigation Assistant (AI Agent — LangGraph)**
+
+1. **Initiate Agentic Investigation Workflow** — Launch guided investigation workflow for an eligible alert or incident case (*Section 4 Layer 3, Section 14B*).
+2. **View Investigation Workflow Steps** — Visual tracking of workflow stages (Retrieve Metadata → Retrieve Policy → Summarize → Recommend → Human Approval → Execute) (*Section 4 Layer 3, Section 14B*).
+3. **View Evidence-Linked Incident Summary** — Generates a factual summary linking incident metadata, camera IDs, timestamps, snapshots, and event clips (*Section 4 Layer 3, Section 14B*).
+4. **View Retrieved Policy Recommendations** — Displays recommended next steps grounded in approved organizational SOPs (*Section 4 Layer 3, Section 14B*).
+5. **Mandatory Human Approval Checkpoint** — Workflow pauses before consequential actions; Supervisor must explicitly Approve or Reject (*Section 4 Layer 3, Section 14B*).
+6. **Execute Approved Consequential Actions** — Upon human approval, updates incident status (e.g., Responding/Resolved) or triggers authorized notifications (*Section 4 Layer 3, Section 14B*).
+7. **Inspect Agent Tool Execution Logs** — View backend tool calls, queries, parameters, and outputs (*Section 4 Layer 3, Section 14B*).
+8. **Display Missing or Conflicting Information** — Explicitly identifies missing clips, offline cameras, or conflicting evidence (*Section 4 Layer 3, Section 14B*).
+9. **Prevent Autonomous Identity Accusation** — Enforces safety rule: the agent cannot declare identity confirmation or legal guilt (*Section 4 Layer 3, Section 14B*).
+10. **Prevent Duplicate Actions (Idempotency)** — Uses idempotency controls to prevent duplicate alert escalations or status changes (*Section 4 Layer 3, Section 14B*).
+11. **Enforce Workspace and Role Scope** — Rejects investigations outside the caller’s authorized organization and role (*Section 4 Layer 3, Section 21*).
+12. **Record Complete Investigation Trail in Audit Logs** — Logs actor, approval decision, timestamp, tool calls, and results in audit records (*Section 4 Layer 3, Section 14B, Section 18*).
+
+---
+
+### **17. Audit Logs (Operational Scope)**
+
+1. **View Permitted Operational Audit Logs** — Displays activity logs for guards and security operations within supervisor's scope (*Section 6, Section 18*).
+2. **View Guard Activity Trail** — Dedicated log of guard alert acknowledgements, response confirmations, and manual reports (*Section 18*).
+3. **View Audit Record Attributes** — Shows Timestamp, Acting User ID, Name, Role, Action Performed, Target Entity, and Result (*Section 18*).
+4. **Filter by Operational Activity Type** — Filter by Alert Handling, Guard Response, Camera Toggles, Evidence Save, or Person Search (*Section 18*).
+5. **Filter by Guard Account** — Track activities performed by a specific guard (*Section 18*).
+6. **Filter by Date & Time Range** — Select custom start and end timestamps (*Section 18*).
+7. **Search Operational Logs** — Search by keyword, action name, or target ID (*Section 18*).
+8. **Strict Exclusion of Authentication Secrets** — Passwords, OTPs, reset tokens, and secret keys are strictly omitted from logs (*Section 5, Section 18*).
+9. **Role-Restricted Visibility** — Supervisors cannot view platform audit logs or Admin-private administrative logs (*Section 18*).
+10. **Enforce Workspace Scope** — Supervisor can only view logs from their authorized workspace (*Section 6, Section 18, Section 21*).
+
+---
+
+### **18. Reports & Analytics (Operational)**
+
+1. **View Operational Security Overview** — Summary cards for Total Alerts, Active Incidents, Guard Response Rates, and Active Cameras (*Section 1, Section 2, Section 15*).
+2. **View Alert Analytics by Module Type** — Breakdown of detections (Weapon Detection, Fight/Violence, Tracking events, Restricted-Area matches) (*Section 14, Section 15.1*).
+3. **View Alert Priority Distribution** — Proportions of High-Priority vs. Standard-Priority alerts over time (*Section 15.1*).
+4. **View Incident Response and Resolution Time Metrics** — Tracks average time to acknowledge, respond, and resolve incidents (*Section 15.1, Section 15.3*).
+5. **View Guard Activity & Response Statistics** — Tracks alert acknowledgements, response assessments ("Under Control" / "Additional Guards Required"), and manual report submissions (*Section 7, Section 15.3, Section 15.4*).
+6. **View Manual Security Reports Analytics** — Separate analytics for manual reports submitted by guards, distinguishing them from AI alerts (*Section 7, Section 15.6*).
+7. **View Location-Based Incident Heatmap** — Incidents grouped by Building, Floor, and Area/Zone (*Section 3, Section 15.1*).
+8. **View Camera Uptime Statistics** — Online vs. Offline camera percentages and failure trends (*Section 13, Section 21*).
+9. **View Storage Usage Trends** — Monitoring storage consumption rates and projected retention limits (*Section 17, Section 21*).
+10. **Filter Reports by Date Range** — View data for Today, Last 7 Days, Last 30 Days, or Custom Range (*Section 17, Section 22*).
+11. **Filter Reports by Building / Area** — Filter metrics across the operational hierarchy (*Section 3*).
+12. **Export Operational Reports** — Export operational summaries and metrics to PDF/CSV (*Section 5*).
+13. **Enforce Workspace Data Isolation** — Metrics reflect only the authorized workspace (*Section 3, Section 21*).
+
+---
+
+### **19. Profile Settings**
+
+1. **View Supervisor Profile Attributes** — View System-Generated Supervisor ID (`SUP-XXXXXXXXXXX`), Full Name, Username, Official Email, Phone Number, and Role (*Section 6, Section 9.1, Section 10*).
+2. **Edit Profile Information** — Update Name, Username, and Phone Number (*Section 6, Section 9.4*).
+3. **Change Official Email Address** — Changing email mandatorily triggers and requires Brevo email OTP verification on the new address (*Section 9.4*).
+4. **Verify Current Password and Email OTP for Profile Updates** — Sensitive profile updates require verifying current password and email OTP (*Section 9.4*).
+5. **Change Account Password** — Change password by verifying current password and email OTP (*Section 9.1, Section 9.4, Section 9.6*).
+6. **View System-Generated ID (Read-Only)** — Displays unique Supervisor ID (`SUP-` + 11 numeric digits) (*Section 10*).
+7. **Regenerate Supervisor Displayed ID** — Supervisor regenerates own ID through Settings using password verification (no OTP required); stable database ID and history remain linked (*Section 6, Section 10*).
+8. **Admin Notification on ID Regeneration** — System automatically records ID change in Admin logs and sends a notification to the Organization Admin (*Section 5, Section 10, Section 18*).
+9. **View Assigned Organization and Workspace Scope** — Displays authorized organization and site/branch association (*Section 3, Section 6*).
+10. **Log Profile Changes and ID Regeneration in Audit Trail** — Automatically logs profile updates and ID changes, strictly omitting secrets (*Section 10, Section 18*).

@@ -1,0 +1,42 @@
+# Person detection candidate — YOLO11 fine-tuned on CrowdHuman (full-body boxes).
+# The runtime uses the pretrained YOLOX-Tiny today (Apache-2.0); this run produces a candidate to compare.
+task: human_detection
+name: human_yolo11n
+project: experiments/runs
+seed: 42
+deterministic: true
+model: yolo11n.pt    # small on purpose: the person detector runs on every sampled frame
+imgsz: 640
+epochs: 60
+batch: 64
+workers: 8
+device: 0
+amp: true
+optimizer: AdamW
+lr0: 0.001
+lrf: 0.01
+cos_lr: true
+warmup_epochs: 3
+weight_decay: 0.0005
+patience: 15
+close_mosaic: 10
+augment:
+  hsv_v: 0.5
+  scale: 0.6
+  perspective: 0.0005
+  mosaic: 1.0
+  mixup: 0.1
+eval:
+  score_threshold: auto
+  nms_iou: 0.6
+classes: [person]
+dataset_root: datasets/crowdhuman_yolo
+split_ratios: [0.9, 0.1, 0.0]   # CrowdHuman ships train / val; val is used as the test split
+sources:
+  # CrowdHuman converted to COCO JSON first (datasets/README.md shows the odgt → COCO step)
+  - path: datasets/raw/CrowdHuman/annotations      # instances_train.json, instances_val.json
+    format: coco
+    images_dir: datasets/raw/CrowdHuman/images
+    class_map: {person: person, fbox: person}
+    keep_negatives: true
+    respect_source_splits: true

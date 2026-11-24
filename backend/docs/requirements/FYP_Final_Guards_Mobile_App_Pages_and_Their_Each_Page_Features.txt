@@ -1,0 +1,169 @@
+### **1. Guard Login Screen**
+*(Reference: Master Requirements Specification — Section 7 & Section 9.1)*
+
+The initial authentication screen designed for operational security guards.
+
+1. **Identifier Input Field:** Allows the guard to enter either their **Registered Email Address** or their unique **Guard ID** (e.g., `GRD-XXXXXXXXXXX`).
+2. **Password Input Field:** Masked input field for entering the account password (with Show/Hide toggle).
+3. **Remember Login Identifier:** Checkbox / switch to persist the Guard ID / Email on the local device storage for quick login.
+4. **Log In Action Button:** Validates primary credentials against the FastAPI backend and navigates the guard to the Email OTP Verification Screen.
+5. **Forgot Password Shortcut:** A clickable link navigating to the self-service *Forgot Password Screen* (*Section 9.6*).
+6. **Credential Error Feedback:** Displays clear alert banners on invalid credentials or inactive/removed accounts (*Section 12*).
+7. **Strict Architecture Rules:**
+   - **No Organization Name Field:** Unlike organization registration, guards do **not** enter the organization name during login (*Section 9.1*).
+   - **Mandatory 2FA Gate:** Entering credentials alone does not grant dashboard access; completing Email OTP is strictly mandatory (*Section 9.1*).
+
+---
+
+### **2. Email OTP Verification Screen**
+*(Reference: Master Requirements Specification — Section 7, Section 9.1 & Section 21)*
+
+The second factor authentication step required on every login to ensure security compliance.
+
+1. **OTP Code Input Field:** A 6-digit numeric input field with auto-focus and auto-advance between digits.
+2. **Destination Email Reminder:** Displays a masked preview of the guard's registered email where the OTP was dispatched via Brevo (*e.g., `gu***@company.com`*).
+3. **Resend OTP Countdown Timer:** A 60-second cooldown timer preventing spam requests before enabling the *"Resend Code"* button.
+4. **Resend OTP Button:** Requests a fresh verification code if the previous email was delayed or expired.
+5. **Verify & Continue Action Button:** Validates the OTP against the server; upon success, securely stores the session/auth token (JWT) in device encrypted storage and loads the *Home Screen*.
+6. **Invalid / Expired OTP Alert:** Visual error indicator if an incorrect or expired code is entered.
+
+---
+
+### **3. Forgot Password Screen**
+*(Reference: Master Requirements Specification — Section 7 & Section 9.6)*
+
+Self-service password recovery initiation screen, accessible prior to logging in.
+
+1. **Registered Email Input Field:** Text field where the guard enters their registered organization email address.
+2. **Send Reset Code Button:** Dispatches a secure, single-use password-reset OTP to the guard’s registered email via Brevo.
+3. **Self-Service Verification:** Operates independently without requiring Admin or Supervisor approval (*Section 7 & Section 9.6*).
+4. **Input Validation:** Verifies valid email formatting before triggering the API call.
+5. **Back to Login Navigation:** Allows the guard to cancel and return to the login screen.
+
+---
+
+### **4. Reset Password Screen**
+*(Reference: Master Requirements Specification — Section 7 & Section 9.6)*
+
+The completion screen for setting a new password following OTP verification.
+
+1. **Reset OTP Input Field:** Field to enter the verification code received via email.
+2. **New Password Input Field:** Masked text field to enter the new password.
+3. **Confirm New Password Input Field:** Re-enter the new password to ensure matching input.
+4. **Password Policy Helper:** Visual indicator confirming length and character requirements.
+5. **Reset Password Button:** Submits the new hashed credentials to the backend.
+6. **Success Confirmation Modal:** Confirms password update and automatically redirects the guard to the login screen.
+
+---
+
+### **5. Assigned Alerts / Home Screen**
+*(Reference: Master Requirements Specification — Section 7, Section 15.1, Section 15.2 & Section 15.4)*
+
+The central operational command dashboard showing incoming real-time security alerts.
+
+1. **Active Alerts Feed:** Displays a prioritized list of real-time security alerts filtered by:
+   - Alerts originating from the guard's **Assigned Location** (Building / Area / Floor) (*Section 15.2*).
+   - **Escalated Alerts** broadcasted across the facility (*Section 15.4*).
+   - Targeted alerts explicitly routed to this guard by an Admin or Supervisor (*Section 15.2*).
+2. **Priority Badging:** Distinct color-coded tags indicating severity:
+   - **High Priority (Red):** Weapon Detection & Fight/Violence Detection (*Section 15.1*).
+   - **Standard Priority (Orange/Yellow):** General human tracking/restricted boundary observations.
+3. **Alert Summary Cards:** Each card displays:
+   - Event Type (e.g., *Weapon Detected, Violence Alert*).
+   - Camera Name & Specific Location (Building, Floor, Zone).
+   - Timestamp (e.g., *"2 mins ago"*).
+   - Current Alert Status (*New, Acknowledged, Responding*).
+4. **Alert Filter Tabs:** Quick toggles to switch between *"Active/New"*, *"My Responding"*, and *"Resolved/History"*.
+5. **Connectivity & Offline Banner:** Real-time banner showing online/offline network status (*Section 7 & Section 15.6*).
+   - *Strict Rule:* When offline, the app displays a clear disclaimer that real-time server alerts are paused (*Section 7*).
+6. **Pull-to-Refresh:** Allows manual synchronization of the alert stream.
+
+---
+
+### **6. Alert Details & Action Screen**
+*(Reference: Master Requirements Specification — Section 7, Section 15.1, Section 15.3 & Section 15.4)*
+
+The focused view for evaluating an incident and taking official operational response actions.
+
+1. **Event Snapshot Preview:** Displays the captured video frame/snapshot generated by the AI detection model (*Section 4 & Section 15.1*).
+2. **Incident Metadata Panel:** Comprehensive event breakdown:
+   - Camera ID & Display Name (*Section 13*).
+   - Exact Location Hierarchy (*Building → Floor → Zone/Area*).
+   - Detection Timestamp & Current System Status.
+3. **Acknowledge Alert Action:** Button confirming the guard has seen the alert, updating its status to *"Acknowledged"* on the central Admin/Supervisor dashboards (*Section 15.1 & Section 15.3*).
+4. **Primary Guard Response Options (*Section 15.3*):**
+   - **"Under Control" Button:** Submits the guard's on-site assessment that the situation does not require further intervention.
+   - **"Additional Guards Required" Button:** Triggers an immediate escalation request to the Admin/Supervisor and alerts nearby guards across the organization (*Section 15.4*).
+5. **Escalated Alert Response ("I'm Responding") (*Section 15.4*):**
+   - If viewing an escalated alert from another area, displays the **"I'm Responding"** button to confirm attendance.
+6. **Responding Guards Roster:** Displays other guards who have acknowledged or confirmed they are en route (*Section 15.4*).
+7. **Join Incident Chat Button:** Quick-action button linking directly to the dedicated *Incident Group Chat Screen* (*Section 15.5*).
+
+---
+
+### **7. Incident Group Chat Screen**
+*(Reference: Master Requirements Specification — Section 7 & Section 15.5)*
+
+A real-time, incident-specific operational coordination thread.
+
+1. **Incident Context Header:** Displays the associated Alert ID, Incident Title, and Target Location at the top of the chat.
+2. **Participant Identity & Role Tags:** Each message clearly identifies the sender’s full name and system role (*e.g., "Supervisor Ali", "Guard Ahmed"*).
+3. **Real-Time Operational Messaging:** Exchange instant situation updates, requests for backup, arrival status, and instructions (*Section 15.5*).
+4. **Message Timestamps & Delivery Status:** Exact timestamp recording for operational audit trails (*Section 18*).
+5. **Supervisor / Admin Directives:** Visual distinction for instructional messages posted by Admins/Supervisors directing guards to specific locations (*Section 15.5*).
+6. **Strict Access Isolation:** Access is strictly bounded to the authorized incident participants; users outside the event scope cannot view or access the thread (*Section 15.5*).
+
+---
+
+### **8. Submit Manual Report Screen**
+*(Reference: Master Requirements Specification — Section 7 & Section 15.6)*
+
+Allows guards to independently report security observations that occurred outside camera coverage.
+
+1. **Report Type Selector:** Dropdown to select incident category (*e.g., Suspicious Person, Property Damage, Trespassing, Lost Item, General Hazard*).
+2. **Location Selection Dropdowns:** Structured location hierarchy matching the facility:
+   - Building dropdown
+   - Floor dropdown (if applicable)
+   - Specific Area / Zone dropdown (*Section 3*)
+3. **Incident Description Field:** Multi-line text box to enter detailed notes and observations.
+4. **Evidence Photo Attachment:** Option to capture a real-time photo using the device camera or upload an image from the gallery (*Section 15.6*).
+5. **Submit Report Action Button:** Submits the report to the FastAPI backend.
+6. **Automatic Offline Queuing:** If the mobile device loses internet connectivity, the report is automatically queued in local storage with retry indicators (*Section 7 & Section 15.6*).
+7. **Distinct Event Classification:** Ensures the manual report is logged as a separate entity from AI-generated CCTV alerts (*Section 7 & Section 15.6*).
+
+---
+
+### **9. My Reports & Offline Queue Screen**
+*(Reference: Master Requirements Specification — Section 7 & Section 15.6)*
+
+History and synchronization center for all manual reports submitted by the guard.
+
+1. **Submitted Reports History:** Paginated list of previously filed manual reports with timestamps, types, and locations.
+2. **Offline Outbox / Pending Queue Section:** Displays reports saved locally while the device was disconnected (*Section 15.6*).
+3. **Sync Status Badges:** Visual tags on each report:
+   - **Synced (Green):** Successfully delivered to the central server.
+   - **Pending Offline (Orange):** Waiting for an active internet connection.
+   - **Retrying (Blue):** Active upload in progress.
+4. **Manual Retry All Action:** Trigger button to flush and upload all pending queued reports once the network is restored.
+5. **Idempotency Protection:** Prevents duplicate report creation during unstable network reconnections (*Section 15.6*).
+
+---
+
+### **10. Guard Profile & Settings Screen**
+*(Reference: Master Requirements Specification — Section 7, Section 9.4, Section 9.6 & Section 10)*
+
+View-only account details, security credential updates, and session controls.
+
+1. **Guard Profile Overview (View-Only):**
+   - Guard Full Name and registered Email Address.
+   - Displayed unique **Guard ID** (*GRD-XXXXXXXXXXX*).
+   - System Account Status (*Active*).
+   - Currently assigned organizational location (*Building / Floor / Zone*) (*Section 7*).
+2. **Strict Profile Editing Boundary:**
+   - Visual notice that guard profile details and location assignments cannot be edited by the guard; they are managed exclusively by an Admin or Supervisor (*Section 7 & Section 9.5*).
+   - Guard cannot regenerate their own displayed Guard ID (*Section 10*).
+3. **Change Password Section:**
+   - Input fields for *Current Password*, *New Password*, and *Confirm Password* (*Section 9.6*).
+   - Allows guards to update their password securely without requiring Admin approval.
+4. **Network & Connection Status Diagnostic:** Displays the live WebSocket/broker connection state.
+5. **Log Out Button:** Clears encrypted session credentials from the device and securely navigates back to the Login Screen.

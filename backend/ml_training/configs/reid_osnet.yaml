@@ -1,0 +1,52 @@
+# Cross-camera person Re-ID — OSNet-x1.0 + BNNeck, CE (label smoothing) + batch-hard triplet + centre loss.
+task: person_reid
+name: reid_osnet_x1_0_market
+project: experiments/runs
+seed: 42
+deterministic: false
+
+model:
+  backbone: osnet_x1_0        # osnet_x1_0 | osnet_x0_5 | resnet50_ibn_a
+  embed_dim: 512
+  pretrained: true            # ResNet50-IBN: ImageNet weights via torchvision. OSNet: give pretrained_path
+  pretrained_path: null       # e.g. weights/osnet_x1_0_imagenet.pth (torchreid's ImageNet weights)
+  height: 256
+  width: 128
+
+data:
+  root: datasets/raw/Market-1501
+  layout: market1501          # market1501 | msmt17 | cuhk03
+  holdout_identity_fraction: 0.1    # training identities used as the validation query/gallery
+  extra_train: []             # e.g. [{root: datasets/raw/MSMT17, layout: msmt17}] to train on both
+
+sampler:
+  p: 16                       # identities per batch
+  k: 4                        # images per identity → batch 64
+
+augment:
+  cctv: true                  # photometric CCTV augmentation (or a CctvAugmentConfig mapping)
+  random_erasing: 0.5
+
+train:
+  epochs: 120
+  optimizer: adam
+  lr: 0.00035
+  weight_decay: 0.0005
+  warmup_epochs: 10
+  label_smoothing: 0.1
+  triplet_margin: 0.3         # null = soft margin
+  triplet_weight: 1.0
+  center_weight: 0.0005
+  center_lr: 0.5
+  grad_clip: 5.0
+  workers: 8
+  device: auto
+  precision: auto
+  eval_every: 10
+  patience_evals: 4
+
+eval:
+  flip_tta: true
+  batch_size: 128
+  likely_precision: 0.95      # LIKELY_MATCH band: cosine threshold reaching this precision on val pairs
+  uncertain_precision: 0.5    # UNCERTAIN band lower edge

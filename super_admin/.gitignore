@@ -1,0 +1,18 @@
+# Node & build
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+
+# Python caches from the stdlib smoke scripts
+__pycache__/
+.ruff_cache/
+
+# Secrets (only .env.example is committed)
+.env
+.env.*
+!.env.example

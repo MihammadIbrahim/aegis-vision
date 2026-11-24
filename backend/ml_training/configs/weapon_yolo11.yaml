@@ -1,0 +1,76 @@
+# Weapon detection — YOLO11 (ultralytics) on handgun / knife surveillance datasets.
+# Override any key on the command line: key=value (nested: augment.mixup=0.2).
+task: weapon_detection
+name: weapon_yolo11m
+project: experiments/runs
+seed: 42
+deterministic: true
+
+# Architecture. COCO-pretrained starting points are downloaded by ultralytics on first use.
+#   yolo11m.pt  (20 M params; RTX 4080: batch 32 @ 640)   yolo11l.pt (25 M; batch 16–24)
+#   rtdetr-l.pt (32 M; batch 8–16; no NMS; slower on CPU)
+model: yolo11m.pt
+imgsz: 640
+epochs: 100
+batch: 32
+workers: 8
+device: 0            # GPU index, "0,1" for two GPUs, or cpu
+amp: true            # fp16/bf16 mixed precision (ultralytics picks the dtype for the GPU)
+optimizer: AdamW
+lr0: 0.001
+lrf: 0.01
+cos_lr: true
+warmup_epochs: 3
+weight_decay: 0.0005
+patience: 25         # early stopping on val mAP50-95
+close_mosaic: 10     # last epochs without mosaic
+cache: false         # "ram" on the GPU server if memory allows
+
+# CCTV augmentation (ultralytics hyper-parameters; albumentations blur/grey/CLAHE/JPEG are added automatically)
+augment:
+  hsv_h: 0.015
+  hsv_s: 0.6
+  hsv_v: 0.5         # wide brightness range: night, IR, over-exposed entrances
+  degrees: 5.0
+  translate: 0.1
+  scale: 0.5
+  shear: 2.0
+  perspective: 0.0005   # high, tilted camera viewpoints
+  flipud: 0.0
+  fliplr: 0.5
+  mosaic: 1.0
+  mixup: 0.15
+  copy_paste: 0.0
+  erasing: 0.4
+
+eval:
+  score_threshold: auto   # chosen on val by F1, then applied to test; or a number
+  nms_iou: 0.6
+
+# Dataset: converted once by `prepare` into one YOLO layout with a deterministic split.
+classes: [handgun, knife]
+dataset_root: datasets/weapons_yolo
+split_ratios: [0.8, 0.1, 0.1]
+sources:
+  # OD-WeaponDetection "Weapons and similar handled objects" (Pascal VOC): map its labels, drop similar objects
+  - path: datasets/raw/OD-WeaponDetection/Weapons_and_similar_handled_objects
+    format: voc
+    class_map: {pistol: handgun, knife: knife}
+    keep_negatives: true          # images with only billete/monedero/tarjeta/smartphone become negatives
+  # Sohas_weapon (Pascal VOC)
+  - path: datasets/raw/Sohas_weapon
+    format: voc
+    class_map: {pistol: handgun, knife: knife}
+    keep_negatives: true
+  # YouTube-GDD (YOLO format; its two classes are gun and person: person boxes are dropped)
+  - path: datasets/raw/YouTube-GDD
+    format: yolo
+    source_names: [gun, person]
+    class_map: {gun: handgun}
+    keep_negatives: true
+  # Any Roboflow / CCTV weapon export in YOLO format with train/valid/test folders
+  # - path: datasets/raw/cctv_weapons_roboflow
+  #   format: yolo
+  #   source_names: [knife, pistol]
+  #   class_map: {knife: knife, pistol: handgun}
+  #   respect_source_splits: true

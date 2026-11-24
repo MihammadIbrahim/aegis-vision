@@ -1,0 +1,101 @@
+from fastapi import APIRouter
+
+from src.presentation.api.v1 import (
+    account_lifecycle_router,
+    ai_config_router,
+    alert_router,
+    analytics_router,
+    assistant_router,
+    audit_log_router,
+    auth_router,
+    branch_approval_router,
+    call_router,
+    camera_router,
+    campus_request_application_router,
+    device_token_router,
+    evidence_router,
+    guard_app_router,
+    guard_router,
+    incident_router,
+    location_router,
+    manual_report_router,
+    notification_router,
+    organization_admin_router,
+    organization_registration_router,
+    organization_router,
+    organization_settings_router,
+    password_reset_router,
+    person_search_router,
+    personnel_import_router,
+    personnel_router,
+    platform_admin_router,
+    platform_health_router,
+    platform_management_router,
+    profile_router,
+    realtime_router,
+    recording_router,
+    restricted_access_router,
+    staff_router,
+    staff_session_router,
+    storage_settings_router,
+    supervisor_profile_router,
+    supervisor_router,
+    user_records_router,
+)
+
+api_router = APIRouter(prefix="/api/v1")
+api_router.include_router(organization_router.router)
+api_router.include_router(branch_approval_router.router)
+api_router.include_router(camera_router.router)
+api_router.include_router(platform_admin_router.router)
+api_router.include_router(platform_management_router.router)
+api_router.include_router(platform_health_router.router)
+api_router.include_router(organization_registration_router.router)
+api_router.include_router(campus_request_application_router.router)
+api_router.include_router(auth_router.router)
+api_router.include_router(organization_admin_router.router)
+api_router.include_router(supervisor_router.router)
+api_router.include_router(password_reset_router.router)
+api_router.include_router(staff_session_router.router)
+api_router.include_router(supervisor_profile_router.router)
+api_router.include_router(guard_router.router)
+api_router.include_router(guard_app_router.auth_router)
+api_router.include_router(guard_app_router.app_router)
+api_router.include_router(account_lifecycle_router.router)
+api_router.include_router(location_router.router)
+api_router.include_router(alert_router.internal_router)
+api_router.include_router(alert_router.router)
+api_router.include_router(alert_router.sync_router)
+api_router.include_router(manual_report_router.guard_router)
+api_router.include_router(manual_report_router.router)
+api_router.include_router(notification_router.router)
+api_router.include_router(personnel_router.router)
+api_router.include_router(personnel_import_router.router)
+api_router.include_router(restricted_access_router.router)
+api_router.include_router(staff_router.router)
+api_router.include_router(recording_router.router)
+api_router.include_router(storage_settings_router.router)  # before /recordings/{id}
+api_router.include_router(recording_router.recordings_router)
+api_router.include_router(recording_router.internal_router)
+api_router.include_router(evidence_router.router)
+api_router.include_router(audit_log_router.router)
+api_router.include_router(assistant_router.router)  # decision D-027
+api_router.include_router(assistant_router.internal_router)
+api_router.include_router(incident_router.router)
+api_router.include_router(incident_router.guard_router)
+api_router.include_router(ai_config_router.router)
+api_router.include_router(ai_config_router.live_router)
+api_router.include_router(ai_config_router.internal_router)
+api_router.include_router(organization_settings_router.router)
+api_router.include_router(person_search_router.router)
+api_router.include_router(person_search_router.internal_router)
+api_router.include_router(profile_router.router)
+api_router.include_router(user_records_router.router)
+api_router.include_router(user_records_router.staff_router)
+api_router.include_router(analytics_router.router)
+# Decision D-025: voice calls, device push tokens, real-time WebSocket.
+api_router.include_router(call_router.alert_router)
+api_router.include_router(call_router.incident_router)
+api_router.include_router(call_router.router)
+api_router.include_router(device_token_router.router)
+api_router.include_router(realtime_router.router)

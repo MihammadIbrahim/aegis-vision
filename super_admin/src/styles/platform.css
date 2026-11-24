@@ -1,0 +1,36 @@
+/* Super Admin app additions, built only on tokens.css (both themes). */
+.login-title { display: flex; align-items: center; gap: var(--space-2); }
+.stack-tight { display: inline-flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-1); justify-content: flex-end; }
+.quick-links { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.quick-links .btn { text-decoration: none; }
+.deleted-list { columns: 2 16rem; margin: 0; }
+.deleted-list li { padding: var(--space-1) 0; break-inside: avoid; overflow-wrap: anywhere; }
+.switch-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2); }
+.health-summary { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: var(--space-4); margin-bottom: var(--space-4); }
+.service-grid > .card { margin-bottom: 0; }
+.service-card .card-head h2 { font-size: var(--text-md); }
+.service-card.is-muted { border-style: dashed; box-shadow: none; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: var(--space-2) var(--space-4); margin: var(--space-2) 0 0; }
+.metrics dt { font-size: var(--text-xs); color: var(--color-text-muted); }
+.metrics dd { margin: 0; overflow-wrap: anywhere; }
+.meter { height: 0.75rem; border-radius: var(--radius-pill); background: var(--color-surface-hover); border: 1px solid var(--color-border); overflow: hidden; margin: var(--space-2) 0; }
+.meter > span { display: block; height: 100%; background: var(--color-success); }
+.meter.level-warning > span { background: var(--color-warning); }
+.meter.level-critical > span { background: var(--color-danger); }
+.checks { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: var(--text-sm); margin: 0; }
+.checks .ok { color: var(--color-success-text); }
+.checks .todo { color: var(--color-text-muted); }
+.inline-field { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+.recovery-banner { display: flex; align-items: flex-start; gap: var(--space-2); }
+.deleted-orgs h2 { display: flex; align-items: center; gap: var(--space-2); }
+@media (max-width: 639px) {
+  .inline-field { flex: 1 1 100%; }
+  .inline-field input { flex: 1; }
+}
+/* Visually hidden text in table cells is absolutely positioned: keep it inside the scrolling table so it
+   can never widen the page. */
+.table-scroll, .table-scroll table { position: relative; }
+.stack > .badge { align-self: flex-start; }
+.badge { white-space: nowrap; }

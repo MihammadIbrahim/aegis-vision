@@ -1,0 +1,64 @@
+# AI Investigation & Security Analytics Chatbot (decision D-027) — Qwen2.5-14B-Instruct, 4-bit NF4 QLoRA (optional, dedicated GPU runs).
+# Tuned for one NVIDIA RTX 5080 (16 GB, Blackwell sm_120; PyTorch built for CUDA 12.8+). Expected peak ≈ 15 GB at batch 1: close the desktop session; lower max_seq_length to 1536 if out of memory.
+# The model learns the runtime's planner (question + context → read-only tool calls as JSON) and grounded
+# rephrasing; every number in production still comes from SQL (assistant_engine verifies the model's output).
+task: chatbot_sft
+name: chatbot_qwen25_14b_qlora
+project: experiments/runs
+seed: 2027
+
+model:
+  base: Qwen/Qwen2.5-14B-Instruct
+  revision: main
+  trust_remote_code: false
+  max_seq_length: 2048
+  attn_implementation: sdpa        # flash_attention_2 only if a Blackwell-compatible build is installed
+
+quantization:                       # bitsandbytes 4-bit (QLoRA)
+  load_in_4bit: true
+  bnb_4bit_quant_type: nf4
+  bnb_4bit_compute_dtype: bfloat16
+  bnb_4bit_use_double_quant: true
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  bias: none
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+train:
+  epochs: 3
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 16   # effective batch 16
+  learning_rate: 0.00015
+  lr_scheduler: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  max_grad_norm: 0.3
+  bf16: true
+  gradient_checkpointing: true
+  optim: paged_adamw_8bit
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  completion_only_loss: true        # loss on the assistant turn only
+  packing: false
+
+dataset:
+  dir: datasets/chatbot
+  seed: 2027
+  sizes: {train: 6000, validation: 600, test: 600}
+  mix: {planner: 0.45, follow_up: 0.15, refusal: 0.1, safety: 0.1, missing_data: 0.1, phrasing: 0.1}
+  now: "2026-11-19T10:30:00+00:00"  # fixed "today" so date phrases resolve the same way everywhere
+  time_zone: Asia/Karachi
+
+export:
+  ollama_model: cctv-assistant-14b
+  gguf_quantization: Q4_K_M
+  num_ctx: 4096
+  temperature: 0

@@ -1,0 +1,34 @@
+# Web framework & server
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
+# Validation & settings
+pydantic==2.14.1
+pydantic-settings==2.16.1
+email-validator==2.3.0
+# Database (PostgreSQL) & migrations
+sqlalchemy[asyncio]==2.1.6
+asyncpg==0.32.0
+psycopg[binary]==3.3.6
+alembic==1.20.1
+# Security: Argon2 hashing, JWT
+argon2-cffi==25.1.0
+pyjwt==2.15.1
+# Cache / OTP store / rate limiting
+redis==8.1.0
+# Messaging (RabbitMQ, async)
+aio-pika==10.2.1
+# HTTP client (Brevo email API)
+httpx==0.28.1
+# Object storage (Azure Blob)
+azure-storage-blob==12.31.0
+# Uploads (reference photos, guard report photos)
+pillow==13.0.0
+# Person Search by photo: the Re-ID ONNX model (CPU)
+numpy==2.4.6
+onnxruntime==1.31.0
+# Report exports (CSV built-in; PDF / Excel)
+reportlab==5.1.0
+openpyxl==3.1.5
+# Read-only AI Investigation & Security Analytics Chatbot engine (decision D-027), from this repository
+-e ../ai_rag_and_agent
